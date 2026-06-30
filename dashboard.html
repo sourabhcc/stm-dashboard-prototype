@@ -834,10 +834,22 @@
     if (!userHiddenWidgets[id]) _origShow(id);
   };
 
+  function tierAllows(required) {
+    if (required === 'advanced') return currentTier === 'advanced' || currentTier === 'premium';
+    if (required === 'premium')  return currentTier === 'premium';
+    return true;
+  }
+
+  // Only widgets available on the currently selected tier
+  function tierAvailableWidgets() {
+    return WIDGET_REGISTRY.filter(function(w) {
+      return !w.tierRequired || tierAllows(w.tierRequired);
+    });
+  }
+
   function openWidgetManager() {
-    // Seed pending state from current user-hidden set
     wmPending = {};
-    WIDGET_REGISTRY.forEach(function(w) { wmPending[w.id] = !userHiddenWidgets[w.id]; });
+    tierAvailableWidgets().forEach(function(w) { wmPending[w.id] = !userHiddenWidgets[w.id]; });
     renderWmList();
     updateWmCount();
     document.getElementById('wm-backdrop').classList.remove('opacity-0', 'pointer-events-none');
@@ -852,26 +864,23 @@
   }
 
   function applyWidgetChanges() {
-    WIDGET_REGISTRY.forEach(function(w) {
+    tierAvailableWidgets().forEach(function(w) {
       userHiddenWidgets[w.id] = !wmPending[w.id];
       var el = document.getElementById(w.id);
       if (!el) return;
       if (wmPending[w.id]) {
-        // User wants it visible — only show if tier allows it
-        if (!w.tierRequired || tierAllows(w.tierRequired)) {
-          el.style.removeProperty('display');
-        }
+        el.style.removeProperty('display');
       } else {
         el.style.setProperty('display', 'none', 'important');
       }
     });
-    // Hide whole section if every widget in it is now hidden
+    // Hide whole section if every tier-available widget in it is now hidden
     Object.keys(SECTION_MAP).forEach(function(sectionName) {
-      var widgets = WIDGET_REGISTRY.filter(function(w) { return w.section === sectionName; });
+      var widgets = tierAvailableWidgets().filter(function(w) { return w.section === sectionName; });
       var sectionId = SECTION_MAP[sectionName];
       var anyVisible = widgets.some(function(w) {
         var el = document.getElementById(w.id);
-        return el && el.style.display !== 'none' && !el.style.cssText.includes('none');
+        return el && !el.style.cssText.includes('none');
       });
       var sectionEl = document.getElementById(sectionId);
       if (sectionEl) {
@@ -882,53 +891,45 @@
     closeWidgetManager();
   }
 
-  function tierAllows(required) {
-    if (required === 'advanced') return currentTier === 'advanced' || currentTier === 'premium';
-    if (required === 'premium')  return currentTier === 'premium';
-    return true;
-  }
-
   function wmToggle(id, checked) {
     wmPending[id] = checked;
     updateWmCount();
   }
 
   function wmShowAll() {
-    WIDGET_REGISTRY.forEach(function(w) { wmPending[w.id] = true; });
+    tierAvailableWidgets().forEach(function(w) { wmPending[w.id] = true; });
     renderWmList();
     updateWmCount();
   }
 
   function wmFocusView() {
     var focus = ['widget-clm-expiring', 'widget-clm-action', 'widget-rm-alerts', 'widget-sl-signing', 'widget-sl-license'];
-    WIDGET_REGISTRY.forEach(function(w) { wmPending[w.id] = focus.indexOf(w.id) !== -1; });
+    tierAvailableWidgets().forEach(function(w) { wmPending[w.id] = focus.indexOf(w.id) !== -1; });
     renderWmList();
     updateWmCount();
   }
 
   function updateWmCount() {
-    var total   = WIDGET_REGISTRY.length;
-    var visible = WIDGET_REGISTRY.filter(function(w) { return wmPending[w.id]; }).length;
-    document.getElementById('wm-count').textContent = visible + ' of ' + total + ' visible';
+    var available = tierAvailableWidgets();
+    var visible   = available.filter(function(w) { return wmPending[w.id]; }).length;
+    document.getElementById('wm-count').textContent = visible + ' of ' + available.length + ' visible';
   }
 
   function renderWmList() {
+    var available = tierAvailableWidgets();
     var sections = [];
     var seen = {};
-    WIDGET_REGISTRY.forEach(function(w) {
+    available.forEach(function(w) {
       if (!seen[w.section]) { seen[w.section] = true; sections.push(w.section); }
     });
 
     var html = sections.map(function(sectionName) {
-      var widgets = WIDGET_REGISTRY.filter(function(w) { return w.section === sectionName; });
+      var widgets = available.filter(function(w) { return w.section === sectionName; });
       var rows = widgets.map(function(w) {
         var checked = wmPending[w.id] ? 'checked' : '';
-        var tierBadge = w.tierRequired
-          ? '<span class="ml-1.5 rounded-full bg-[#e8f3fb] px-2 py-0.5 text-[10px] font-medium text-[#0174C3] uppercase tracking-wide">' + w.tierRequired + '</span>'
-          : '';
         return '<div class="flex items-center justify-between border-b border-[#e7ebef] px-6 py-3 last:border-b-0">' +
           '<div>' +
-            '<p class="text-[13px] font-medium text-[#353535]">' + w.label + tierBadge + '</p>' +
+            '<p class="text-[13px] font-medium text-[#353535]">' + w.label + '</p>' +
             '<p class="text-[12px] text-[#636a6e]">' + (wmPending[w.id] ? 'Visible' : 'Hidden') + '</p>' +
           '</div>' +
           '<label class="wm-toggle relative cursor-pointer">' +
