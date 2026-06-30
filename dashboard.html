@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Software Trust – Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] } }
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/ag-charts-community@9.3.2/dist/umd/ag-charts-community.min.js"></script>
+  <style>
+    * { font-family: 'Plus Jakarta Sans', sans-serif; }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-thumb { background: #c1c8cd; border-radius: 3px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+  </style>
+</head>
+<body class="min-h-screen bg-white text-[#353535]">
+
+<a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-[#0D3B8C] focus:shadow-lg">Skip to main content</a>
+
+<!-- ═══ TOP HEADER ═══ -->
+<header class="fixed left-0 right-0 top-0 z-30 flex h-12 items-center justify-between bg-[#0174C3] px-4 text-white shadow-sm">
+  <div class="flex items-center gap-5">
+    <button class="rounded p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70" aria-label="Open navigation">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+    </button>
+    <div class="text-base font-medium">digicert<span class="font-light">ONE</span></div>
+  </div>
+  <div class="flex items-center gap-4">
+    <button class="rounded p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70" aria-label="Notifications">
+      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
+    </button>
+    <button class="rounded p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70" aria-label="Settings">
+      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+    </button>
+    <button class="rounded p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70" aria-label="Help">
+      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+    </button>
+    <button class="rounded p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70" aria-label="AI summary">
+      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
+    </button>
+    <button class="flex h-7 w-7 items-center justify-center rounded-full bg-sky-950 text-xs font-medium" aria-label="User menu">D</button>
+  </div>
+</header>
+
+<!-- ═══ PRODUCT SWITCHER ═══ -->
+<aside class="fixed bottom-0 left-0 top-12 z-20 hidden w-14 border-r border-slate-200 bg-[#eef3f8] pt-2 md:block" aria-label="Product switcher">
+  <nav><div class="space-y-1">
+
+    <button class="relative flex h-10 w-full items-center justify-center text-slate-500 hover:bg-white" aria-label="Dashboard">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M3 12h18"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+    </button>
+    <button class="relative flex h-10 w-full items-center justify-center text-slate-500 hover:bg-white" aria-label="Quantum Central">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
+    </button>
+    <button class="relative flex h-10 w-full items-center justify-center text-slate-500 hover:bg-white" aria-label="CertCentral">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+    </button>
+    <button class="relative flex h-10 w-full items-center justify-center text-slate-500 hover:bg-white" aria-label="Private CA">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="16" r="1"/><rect x="3" y="10" width="18" height="12" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg>
+    </button>
+    <button class="relative flex h-10 w-full items-center justify-center text-slate-500 hover:bg-white" aria-label="Trust Lifecycle">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+    </button>
+
+    <!-- Software Trust — ACTIVE -->
+    <button class="relative flex h-10 w-full items-center justify-center bg-sky-100 text-sky-800 before:absolute before:left-0 before:top-1 before:h-8 before:w-1 before:bg-[#0174C3]" aria-label="Software Trust" aria-current="page">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+    </button>
+
+    <button class="relative flex h-10 w-full items-center justify-center text-slate-500 hover:bg-white" aria-label="DNS Trust">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+    </button>
+    <button class="relative flex h-10 w-full items-center justify-center text-slate-500 hover:bg-white" aria-label="Content Trust">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
+    </button>
+    <button class="relative flex h-10 w-full items-center justify-center text-slate-500 hover:bg-white" aria-label="Device Trust">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    </button>
+    <button class="relative flex h-10 w-full items-center justify-center text-slate-500 hover:bg-white" aria-label="AI Agents">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg>
+    </button>
+    <button class="relative flex h-10 w-full items-center justify-center text-slate-500 hover:bg-white" aria-label="Valimail">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+    </button>
+
+  </div></nav>
+</aside>
+
+<!-- ═══ SECONDARY NAV — Software Trust ═══ -->
+<aside class="fixed bottom-0 left-14 top-12 z-20 hidden w-[220px] border-r border-slate-300 bg-[#e6eaf0] md:block" aria-label="Software Trust navigation">
+  <div class="flex h-12 items-center border-b border-slate-300 px-4 text-sm font-medium text-[#353535]">Software Trust</div>
+  <nav class="h-[calc(100%-3rem)] overflow-y-auto py-2 text-sm">
+
+    <!-- Overview group (expanded) -->
+    <button type="button" class="flex w-full items-center justify-between px-4 py-2.5 text-left text-sm font-semibold text-slate-800 hover:bg-white/70">
+      <span>Overview</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="-rotate-180 transition-transform"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    <button type="button" aria-current="page" class="block w-full px-5 py-2 text-left text-sm font-medium bg-[#0174C3] text-white">Dashboard</button>
+    <button type="button" class="block w-full px-5 py-2 text-left text-sm text-slate-700 hover:bg-white/70 hover:text-[#353535]">Alerts</button>
+    <button type="button" class="block w-full px-5 py-2 text-left text-sm text-slate-700 hover:bg-white/70 hover:text-[#353535]">Audit logs</button>
+    <button type="button" class="block w-full px-5 py-2 text-left text-sm text-slate-700 hover:bg-white/70 hover:text-[#353535]">Signature logs</button>
+
+    <!-- Collapsed groups -->
+    <button type="button" class="flex w-full items-center justify-between px-4 py-2.5 text-left text-sm font-semibold text-slate-800 hover:bg-white/70 mt-1">
+      <span>Release security</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    <button type="button" class="flex w-full items-center justify-between px-4 py-2.5 text-left text-sm font-semibold text-slate-800 hover:bg-white/70">
+      <span>Signing</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    <button type="button" class="flex w-full items-center justify-between px-4 py-2.5 text-left text-sm font-semibold text-slate-800 hover:bg-white/70">
+      <span>Configurations</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    <button type="button" class="flex w-full items-center justify-between px-4 py-2.5 text-left text-sm font-semibold text-slate-800 hover:bg-white/70">
+      <span>Integrations</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+
+  </nav>
+</aside>
+
+<!-- Collapse toggle -->
+<button class="fixed top-[5.15rem] z-30 hidden h-7 w-7 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 shadow-sm md:flex left-[16.4rem]" aria-label="Collapse navigation">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="rotate-90"><path d="m6 9 6 6 6-6"/></svg>
+</button>
+
+<!-- ═══ MAIN CONTENT ═══ -->
+<main id="main-content" class="min-h-screen pt-12 md:ml-[17.25rem]">
+  <div class="w-full space-y-7 px-6 py-6 lg:px-10">
+
+    <!-- PAGE HEADER -->
+    <header class="border-b border-[#d6dce1] pb-0">
+
+      <!-- Row 1: Title + Tier selector -->
+      <div class="flex items-center gap-4 pb-4">
+        <div class="min-w-0">
+          <div class="flex items-center gap-3">
+            <h1 class="text-[26px] font-medium leading-9 tracking-[-0.01em] text-[#1a2332]">Dashboard</h1>
+            <!-- Tier selector -->
+            <div class="inline-flex items-center rounded-[6px] border border-[#d6dce1] bg-[#f0f3f5] p-[3px]" role="radiogroup" aria-label="Tier">
+              <button type="button" role="radio" id="tier-essentials" onclick="setTier('essentials')"
+                class="rounded-[4px] px-3 py-1 text-[13px] font-medium transition-all bg-white text-[#353535] shadow-[0_1px_3px_rgba(0,0,0,0.12)]">Essentials</button>
+              <button type="button" role="radio" id="tier-advanced" onclick="setTier('advanced')"
+                class="rounded-[4px] px-3 py-1 text-[13px] font-medium transition-all text-[#636a6e] hover:text-[#353535]">Advanced</button>
+              <button type="button" role="radio" id="tier-premium" onclick="setTier('premium')"
+                class="rounded-[4px] px-3 py-1 text-[13px] font-medium transition-all text-[#636a6e] hover:text-[#353535]">Premium</button>
+            </div>
+          </div>
+          <p class="mt-0.5 text-[14px] leading-5 text-[#636a6e]">Software Trust Manager · Code signing and certificate lifecycle management</p>
+        </div>
+      </div>
+
+      <!-- Row 2: Filters + Actions (tier-driven) -->
+      <div class="flex flex-wrap items-center gap-2 pb-4">
+
+        <!-- CONTRACT PERIOD — always shown; disabled for Essentials -->
+        <div id="filter-contract" class="flex items-center gap-1.5">
+          <label class="text-[12px] font-medium text-[#636a6e]" for="sel-contract">Contract period</label>
+          <select id="sel-contract" class="h-9 rounded-[4px] border border-[#d6dce1] bg-white px-3 text-[14px] text-[#353535]">
+            <option>Jan 2024 – Dec 2024</option>
+            <option>Jan 2025 – Dec 2025</option>
+            <option selected>Jan 2026 – Dec 2026</option>
+          </select>
+        </div>
+
+        <!-- CATEGORY — hidden for Essentials -->
+        <div id="filter-category" class="flex items-center gap-1.5" style="display:none!important;">
+          <label class="text-[12px] font-medium text-[#636a6e]" for="sel-category">Category</label>
+          <select id="sel-category" class="h-9 rounded-[4px] border border-[#d6dce1] bg-white px-3 text-[14px] text-[#353535]">
+            <option>Production</option>
+            <option>Test</option>
+          </select>
+        </div>
+
+        <!-- USER — Premium only -->
+        <div id="filter-user" class="flex items-center gap-1.5" style="display:none!important;">
+          <label class="text-[12px] font-medium text-[#636a6e]" for="sel-user">User</label>
+          <select id="sel-user" class="h-9 rounded-[4px] border border-[#d6dce1] bg-white px-3 text-[14px] text-[#353535]">
+            <option>All users</option>
+            <option>Alice Chen</option>
+            <option>Bob Patel</option>
+            <option>Carlos Ruiz</option>
+            <option>Diana Fox</option>
+          </select>
+        </div>
+
+        <!-- TEAM — Premium only -->
+        <div id="filter-team" class="flex items-center gap-1.5" style="display:none!important;">
+          <label class="text-[12px] font-medium text-[#636a6e]" for="sel-team">Team</label>
+          <select id="sel-team" class="h-9 rounded-[4px] border border-[#d6dce1] bg-white px-3 text-[14px] text-[#353535]">
+            <option>All teams</option>
+            <option>Security</option>
+            <option>Platform</option>
+            <option>Finance</option>
+            <option>Commerce</option>
+            <option>Edge Ops</option>
+          </select>
+        </div>
+
+        <!-- Spacer -->
+        <div class="flex-1"></div>
+
+        <!-- EXPORT REPORT — Premium only -->
+        <button id="btn-export" type="button" style="display:none!important;"
+          class="inline-flex items-center gap-1.5 rounded-[4px] border border-[#0174C3] bg-white px-4 text-[14px] font-medium text-[#0174C3] hover:bg-[#e8f3fb] h-9">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+          Export Report
+        </button>
+
+        <!-- Icon buttons — always visible -->
+        <div class="h-5 w-px bg-[#d6dce1]"></div>
+        <button type="button" aria-label="Manage widgets" class="inline-flex items-center justify-center rounded-[4px] border border-[#0174C3] bg-[#0174C3] text-white hover:bg-[#0161a8] h-9 w-9">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M3 12h18"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+        </button>
+        <button type="button" aria-label="Refresh" class="inline-flex items-center justify-center rounded-[4px] border border-[#0174C3] bg-white text-[#0174C3] hover:bg-[#e8f3fb] h-9 w-9">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+        </button>
+      </div>
+
+      <!-- Tabs: Overview + Action center -->
+      <div class="flex w-full gap-0" role="tablist" aria-label="Dashboard views">
+        <button id="tab-overview" type="button" role="tab" aria-selected="true" aria-controls="panel-overview"
+          class="border-b-2 px-5 py-2.5 text-[14px] font-medium transition border-[#0048ac] text-[#0048ac]"
+          onclick="switchTab('overview')">Overview</button>
+        <button id="tab-action" type="button" role="tab" aria-selected="false" aria-controls="panel-action"
+          class="border-b-2 px-5 py-2.5 text-[14px] font-medium transition border-transparent text-[#636a6e] hover:border-[#c1c8cd] hover:text-[#353535]"
+          onclick="switchTab('action')">Action center</button>
+      </div>
+    </header>
+
+    <!-- ═══════════════════ OVERVIEW PANEL ═══════════════════ -->
+    <div id="panel-overview" role="tabpanel" class="space-y-7 tab-panel active">
+
+      <!-- ══ 1. CERTIFICATE LIFECYCLE MANAGEMENT — all tiers; Signature control: Premium only ══ -->
+      <section aria-label="Certificate lifecycle management">
+        <div class="mb-4 flex items-center justify-between">
+          <h2 class="text-[17px] font-semibold text-[#1a2332]">Certificate lifecycle management</h2>
+        </div>
+        <div class="grid gap-4" style="grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));">
+
+          <!-- Expiring certs in 30 days — all tiers -->
+          <div class="flex flex-col overflow-hidden rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+            <div class="h-[3px] bg-[#f59e0b]"></div>
+            <div class="flex flex-1 flex-col p-5">
+              <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Expiring within 30 days</p>
+              <p class="mt-2 text-[38px] font-semibold leading-none text-[#1a2332]">93</p>
+              <p class="mt-1.5 text-[13px] text-[#636a6e]">certs without auto-renew</p>
+              <div class="mt-5 border-t border-[#e7ebef] pt-4">
+                <button type="button" class="text-[13px] font-medium text-[#0174C3] hover:underline">Renew →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Revoke certificates — all tiers -->
+          <div class="flex flex-col overflow-hidden rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+            <div class="h-[3px] bg-[#dc2626]"></div>
+            <div class="flex flex-1 flex-col p-5">
+              <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Revoke certificates</p>
+              <p class="mt-2 text-[38px] font-semibold leading-none text-[#1a2332]">12</p>
+              <p class="mt-1.5 text-[13px] text-[#636a6e]">pending revocation</p>
+              <div class="mt-5 border-t border-[#e7ebef] pt-4">
+                <button type="button" class="text-[13px] font-medium text-[#0174C3] hover:underline">Revoke →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Certificate requiring action — all tiers -->
+          <div class="flex flex-col overflow-hidden rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+            <div class="h-[3px] bg-[#f59e0b]"></div>
+            <div class="flex flex-1 flex-col p-5">
+              <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Requiring action</p>
+              <p class="mt-2 text-[38px] font-semibold leading-none text-[#1a2332]">38</p>
+              <p class="mt-1.5 text-[13px] text-[#636a6e]">certificates need attention</p>
+              <div class="mt-5 border-t border-[#e7ebef] pt-4">
+                <a href="#" class="text-[13px] font-medium text-[#0174C3] hover:underline">View certificates →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Signature control (Offline release) — Premium only -->
+          <div id="card-sig-control" class="flex flex-col overflow-hidden rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]" style="display:none!important;">
+            <div class="h-[3px] bg-[#0174C3]"></div>
+            <div class="flex flex-1 flex-col p-5">
+              <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Signature control</p>
+              <p class="mt-2 text-[38px] font-semibold leading-none text-[#1a2332]">7</p>
+              <p class="mt-1.5 text-[13px] text-[#636a6e]">offline releases pending approval</p>
+              <div class="mt-5 border-t border-[#e7ebef] pt-4">
+                <button type="button" class="text-[13px] font-medium text-[#0174C3] hover:underline">Approve →</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ══ 2. RELEASE MONITORING — all tiers ══ -->
+      <section aria-label="Release monitoring">
+        <div class="mb-4 flex items-center justify-between">
+          <h2 class="text-[17px] font-semibold text-[#1a2332]">Release monitoring</h2>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-3">
+
+          <!-- Total repositories -->
+          <div class="flex flex-col overflow-hidden rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+            <div class="h-[3px] bg-[#0174C3]"></div>
+            <div class="flex flex-1 flex-col p-5">
+              <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Total repositories</p>
+              <p class="mt-2 text-[38px] font-semibold leading-none text-[#1a2332]">1,247</p>
+              <p class="mt-1.5 text-[13px] text-[#636a6e]">repositories tracked</p>
+              <div class="mt-5 border-t border-[#e7ebef] pt-4">
+                <a href="#" class="text-[13px] font-medium text-[#0174C3] hover:underline">View repositories →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Monitored repositories -->
+          <div class="flex flex-col overflow-hidden rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+            <div class="h-[3px] bg-[#0174C3]"></div>
+            <div class="flex flex-1 flex-col p-5">
+              <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Monitored repositories</p>
+              <p class="mt-2 text-[38px] font-semibold leading-none text-[#1a2332]">891</p>
+              <p class="mt-1.5 text-[13px] text-[#636a6e]">72% of total repositories</p>
+              <div class="mt-5 border-t border-[#e7ebef] pt-4">
+                <a href="#" class="text-[13px] font-medium text-[#0174C3] hover:underline">Manage repositories →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- High and Critical alerts -->
+          <div class="flex flex-col overflow-hidden rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+            <div class="h-[3px] bg-[#dc2626]"></div>
+            <div class="flex flex-1 flex-col p-5">
+              <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">High &amp; Critical alerts</p>
+              <p class="mt-2 text-[38px] font-semibold leading-none text-[#dc2626]">23</p>
+              <p class="mt-1.5 text-[13px] text-[#636a6e]">require immediate attention</p>
+              <div class="mt-5 border-t border-[#e7ebef] pt-4">
+                <a href="#" class="text-[13px] font-medium text-[#0174C3] hover:underline">View alerts →</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ══ 3. VULNERABILITY GOVERNANCE — Advanced + Premium only ══ -->
+      <section id="section-vuln-gov" aria-label="Vulnerability governance" style="display:none!important;">
+        <div class="mb-4 flex items-center justify-between">
+          <h2 class="text-[17px] font-semibold text-[#1a2332]">Vulnerability governance</h2>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-3">
+
+          <!-- Pending review -->
+          <div class="flex flex-col overflow-hidden rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+            <div class="h-[3px] bg-[#f59e0b]"></div>
+            <div class="flex flex-1 flex-col p-5">
+              <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Pending review</p>
+              <p class="mt-2 text-[38px] font-semibold leading-none text-[#1a2332]">47</p>
+              <p class="mt-1.5 text-[13px] text-[#636a6e]">vulnerabilities awaiting decision</p>
+              <div class="mt-5 border-t border-[#e7ebef] pt-4">
+                <a href="#" class="text-[13px] font-medium text-[#0174C3] hover:underline">Review vulnerabilities →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Decisions made -->
+          <div class="flex flex-col overflow-hidden rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+            <div class="h-[3px] bg-[#22c55e]"></div>
+            <div class="flex flex-1 flex-col p-5">
+              <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Decisions made</p>
+              <p class="mt-2 text-[38px] font-semibold leading-none text-[#1a2332]">312</p>
+              <p class="mt-1.5 text-[13px] text-[#636a6e]">in the current contract period</p>
+              <div class="mt-5 border-t border-[#e7ebef] pt-4">
+                <a href="#" class="text-[13px] font-medium text-[#0174C3] hover:underline">View decisions →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Suppressed findings -->
+          <div class="flex flex-col overflow-hidden rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+            <div class="h-[3px] bg-[#94a3b8]"></div>
+            <div class="flex flex-1 flex-col p-5">
+              <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Suppressed findings</p>
+              <p class="mt-2 text-[38px] font-semibold leading-none text-[#1a2332]">28</p>
+              <p class="mt-1.5 text-[13px] text-[#636a6e]">actively suppressed</p>
+              <div class="mt-5 border-t border-[#e7ebef] pt-4">
+                <a href="#" class="text-[13px] font-medium text-[#0174C3] hover:underline">View suppressed →</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ══ 4. SIGNING & LICENSING — all tiers; HSM keypair: Premium only ══ -->
+      <section aria-label="Signing &amp; Licensing">
+        <div class="mb-4 flex items-center justify-between">
+          <h2 class="text-[17px] font-semibold text-[#1a2332]">Signing &amp; Licensing</h2>
+        </div>
+        <div class="grid gap-6 lg:grid-cols-2">
+
+          <!-- ── Left: Signing Usage ── -->
+          <div class="flex flex-col rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+            <div class="border-b border-[#e7ebef] px-6 pt-5 pb-4">
+              <h3 class="text-[18px] font-semibold text-[#1a2332]">Signing Usage</h3>
+              <p class="mt-0.5 text-[13px] text-[#636a6e]">Signature volume, failures, and trend for the selected scope.</p>
+            </div>
+            <div class="flex flex-col gap-5 p-6">
+
+              <!-- Stat chips -->
+              <div class="flex flex-wrap items-start gap-x-7 gap-y-3">
+                <div>
+                  <p class="text-[28px] font-semibold leading-none text-[#16a34a]">1,308</p>
+                  <p class="mt-1 text-[12px] text-[#636a6e]">Completed</p>
+                </div>
+                <div>
+                  <p class="text-[28px] font-semibold leading-none text-[#f57c00]">100</p>
+                  <p class="mt-1 text-[12px] text-[#636a6e]">Failed</p>
+                </div>
+                <div>
+                  <p class="text-[28px] font-semibold leading-none text-[#f57c00]">1.0%</p>
+                  <p class="mt-1 text-[12px] text-[#636a6e]">Failure rate</p>
+                </div>
+                <div>
+                  <p class="text-[28px] font-semibold leading-none text-[#16a34a]">+10%</p>
+                  <p class="mt-1 text-[12px] text-[#636a6e]">Trend</p>
+                </div>
+                <div class="flex-1"></div>
+                <a href="#" class="mt-1 text-[13px] font-medium text-[#0174C3] hover:underline">View signing logs →</a>
+              </div>
+
+              <!-- AG Chart: Volume trend -->
+              <div>
+                <p class="mb-2 text-[12px] font-medium text-[#636a6e]">Volume trend — last 6 months</p>
+                <div id="chart-signing-volume" style="height:165px;width:100%;"></div>
+                <div class="mt-2.5 flex items-center gap-5 text-[12px] text-[#636a6e]">
+                  <div class="flex items-center gap-2">
+                    <svg width="18" height="10" viewBox="0 0 18 10"><line x1="0" y1="5" x2="18" y2="5" stroke="#16a34a" stroke-width="2"/><circle cx="9" cy="5" r="3" fill="#16a34a"/></svg>
+                    Successful
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <svg width="18" height="10" viewBox="0 0 18 10"><line x1="0" y1="5" x2="18" y2="5" stroke="#f57c00" stroke-width="2" stroke-dasharray="4 2"/><circle cx="9" cy="5" r="3" fill="#f57c00"/></svg>
+                    Failed
+                  </div>
+                </div>
+              </div>
+
+              <!-- History table -->
+              <div>
+                <div class="mb-2.5 flex items-center justify-between">
+                  <p class="text-[13px] font-semibold text-[#353535]">Signature usage history</p>
+                  <select id="sig-history-period" class="rounded-[4px] border border-[#d6dce1] bg-white px-2 py-1 text-[12px] text-[#353535]">
+                    <option value="3">Last 3 months</option>
+                    <option value="6">Last 6 months</option>
+                    <option value="12">Last 12 months</option>
+                  </select>
+                </div>
+                <div class="overflow-hidden rounded-[4px] border border-[#d6dce1]">
+                  <div id="sig-history-scroll">
+                    <table class="w-full text-left">
+                      <thead>
+                        <tr class="bg-[#f0f3f5]">
+                          <th class="px-3 py-2.5 text-[11px] font-semibold uppercase tracking-wide text-[#636a6e]">Month</th>
+                          <th class="px-3 py-2.5 text-[11px] font-semibold uppercase tracking-wide text-[#636a6e]">Completed</th>
+                          <th class="px-3 py-2.5 text-[11px] font-semibold uppercase tracking-wide text-[#636a6e]">Failed</th>
+                          <th class="px-3 py-2.5 text-[11px] font-semibold uppercase tracking-wide text-[#636a6e]">Rate</th>
+                          <th class="px-3 py-2.5 text-[11px] font-semibold uppercase tracking-wide text-[#636a6e]">Trend</th>
+                          <th class="px-3 py-2.5 text-[11px] font-semibold uppercase tracking-wide text-[#636a6e]">Pace</th>
+                        </tr>
+                      </thead>
+                      <tbody id="sig-history-tbody" class="divide-y divide-[#e7ebef]">
+                        <tr class="bg-white hover:bg-[#f9fafb]">
+                          <td class="px-3 py-3 text-[13px] font-medium text-[#353535]">March 2026</td>
+                          <td class="px-3 py-3 text-[13px] font-semibold text-[#353535]">10,000</td>
+                          <td class="px-3 py-3 text-[13px] font-medium text-[#f57c00]">100</td>
+                          <td class="px-3 py-3 text-[13px] text-[#353535]">1.0%</td>
+                          <td class="px-3 py-3 text-[13px] font-medium text-[#f57c00]">↑ 10%</td>
+                          <td class="px-3 py-3 text-[13px] font-medium text-[#f57c00]">Above expected</td>
+                        </tr>
+                        <tr class="bg-white hover:bg-[#f9fafb]">
+                          <td class="px-3 py-3 text-[13px] font-medium text-[#353535]">February 2026</td>
+                          <td class="px-3 py-3 text-[13px] font-semibold text-[#353535]">8,900</td>
+                          <td class="px-3 py-3 text-[13px] font-medium text-[#f57c00]">80</td>
+                          <td class="px-3 py-3 text-[13px] text-[#353535]">0.9%</td>
+                          <td class="px-3 py-3 text-[13px] font-medium text-[#16a34a]">↑ 4%</td>
+                          <td class="px-3 py-3 text-[13px] text-[#636a6e]">On track</td>
+                        </tr>
+                        <tr class="bg-white hover:bg-[#f9fafb]">
+                          <td class="px-3 py-3 text-[13px] font-medium text-[#353535]">January 2026</td>
+                          <td class="px-3 py-3 text-[13px] font-semibold text-[#353535]">8,500</td>
+                          <td class="px-3 py-3 text-[13px] font-medium text-[#f57c00]">95</td>
+                          <td class="px-3 py-3 text-[13px] text-[#353535]">1.1%</td>
+                          <td class="px-3 py-3 text-[13px] text-[#636a6e]">—</td>
+                          <td class="px-3 py-3 text-[13px] text-[#636a6e]">On track</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ── Right: License Usage ── -->
+          <div class="flex flex-col rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+            <div class="border-b border-[#e7ebef] px-6 pt-5 pb-4">
+              <h3 class="text-[18px] font-semibold text-[#1a2332]">License Usage</h3>
+              <p class="mt-0.5 text-[13px] text-[#636a6e]">Consumption against contract allocation.</p>
+            </div>
+            <div class="flex flex-1 flex-col gap-4 p-6">
+
+              <!-- License rows — text labels + values + status -->
+              <div class="flex flex-col gap-4">
+
+                <!-- Production signature units — all tiers -->
+                <div class="flex flex-col gap-0.5">
+                  <div class="flex items-baseline justify-between gap-2">
+                    <span class="text-[14px] font-medium text-[#353535]">Production signature units</span>
+                    <span class="shrink-0 text-[14px] font-semibold text-[#353535]">42,873 / 52,950</span>
+                  </div>
+                  <div class="flex items-center justify-between text-[12px]">
+                    <span class="text-[#636a6e]">81% consumed</span>
+                    <span class="font-medium text-[#f57c00]">Nearing limit</span>
+                  </div>
+                </div>
+
+                <!-- HSM keypair units — Premium only -->
+                <div id="license-row-hsm" class="flex flex-col gap-0.5" style="display:none!important;">
+                  <div class="flex items-baseline justify-between gap-2">
+                    <span class="text-[14px] font-medium text-[#353535]">HSM keypair units</span>
+                    <span class="shrink-0 text-[14px] font-semibold text-[#353535]">34 / 40</span>
+                  </div>
+                  <div class="flex items-center justify-between text-[12px]">
+                    <span class="text-[#636a6e]">85% consumed</span>
+                    <span class="font-medium text-[#f57c00]">Nearing limit</span>
+                  </div>
+                </div>
+
+                <!-- Test signature units — all tiers -->
+                <div class="flex flex-col gap-0.5">
+                  <div class="flex items-baseline justify-between gap-2">
+                    <span class="text-[14px] font-medium text-[#353535]">Test signature units</span>
+                    <span class="shrink-0 text-[14px] font-semibold text-[#353535]">2,450 / 10,000</span>
+                  </div>
+                  <div class="flex items-center justify-between text-[12px]">
+                    <span class="text-[#636a6e]">25% consumed</span>
+                    <span class="font-medium text-[#16a34a]">On track</span>
+                  </div>
+                </div>
+
+                <!-- Repositories — all tiers -->
+                <div class="flex flex-col gap-0.5">
+                  <div class="flex items-baseline justify-between gap-2">
+                    <span class="text-[14px] font-medium text-[#353535]">Repositories</span>
+                    <span class="shrink-0 text-[14px] font-semibold text-[#353535]">45 / 50</span>
+                  </div>
+                  <div class="flex items-center justify-between text-[12px]">
+                    <span class="text-[#636a6e]">90% consumed</span>
+                    <span class="font-medium text-[#f57c00]">Nearing limit</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- AG Chart: License usage horizontal bar -->
+              <div id="chart-license-usage" style="height:180px;width:100%;"></div>
+
+              <!-- Warning banner -->
+              <div class="rounded-[4px] border border-[#fde68a] bg-[#fffbeb] px-4 py-3">
+                <p class="text-[13px] text-[#92400e]">At the current pace, production signatures may exceed allocation before the contract term ends.</p>
+              </div>
+
+              <!-- Forecasting upsell -->
+              <div id="license-overage-banner" class="flex items-start gap-3 rounded-[4px] border border-[#d6dce1] bg-[#f9fafb] px-4 py-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0 text-[#94a3b8]"><circle cx="12" cy="16" r="1"/><rect x="3" y="10" width="18" height="12" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg>
+                <div>
+                  <p class="text-[13px] font-semibold text-[#353535]">Projected overage date</p>
+                  <p class="text-[12px] text-[#636a6e]">Upgrade to Premium to see AI-powered forecasts</p>
+                </div>
+              </div>
+
+              <!-- Footer -->
+              <div class="mt-auto border-t border-[#e7ebef] pt-3">
+                <a href="#" class="text-[13px] font-medium text-[#0174C3] hover:underline">View license details →</a>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div><!-- /overview panel -->
+
+    <!-- ═══════════════════ ACTION CENTER PANEL ═══════════════════ -->
+    <div id="panel-action" role="tabpanel" class="space-y-6 tab-panel">
+      <div class="flex h-64 items-center justify-center rounded-[4px] border border-dashed border-[#d6dce1] text-[14px] text-[#636a6e]">
+        Action center — coming soon
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script>
+  // ── Tier switching ──────────────────────────────────────────────
+  var TIER_ACTIVE   = 'rounded-[4px] px-3 py-1 text-[13px] font-medium transition-all bg-white text-[#353535] shadow-[0_1px_3px_rgba(0,0,0,0.12)]';
+  var TIER_INACTIVE = 'rounded-[4px] px-3 py-1 text-[13px] font-medium transition-all text-[#636a6e] hover:text-[#353535]';
+
+  function show(id) { var el = document.getElementById(id); if (el) el.style.removeProperty('display'); }
+  function hide(id) { var el = document.getElementById(id); if (el) el.style.setProperty('display', 'none', 'important'); }
+  function setDisabled(id, val) {
+    var el = document.getElementById(id);
+    if (el) { el.disabled = val; el.classList.toggle('opacity-50', val); el.classList.toggle('cursor-not-allowed', val); }
+  }
+
+  function setTier(tier) {
+    // Tier pill styles
+    ['essentials', 'advanced', 'premium'].forEach(function(t) {
+      document.getElementById('tier-' + t).className = (t === tier) ? TIER_ACTIVE : TIER_INACTIVE;
+    });
+
+    // Filter bar
+    if (tier === 'essentials') {
+      show('filter-contract'); setDisabled('sel-contract', true);
+      hide('filter-category'); hide('filter-user'); hide('filter-team'); hide('btn-export');
+    } else if (tier === 'advanced') {
+      show('filter-contract'); setDisabled('sel-contract', false);
+      show('filter-category'); hide('filter-user'); hide('filter-team'); hide('btn-export');
+    } else {
+      show('filter-contract'); setDisabled('sel-contract', false);
+      show('filter-category'); show('filter-user'); show('filter-team'); show('btn-export');
+    }
+
+    // Section / card visibility
+    if (tier === 'essentials') {
+      hide('section-vuln-gov');
+      hide('card-sig-control');
+      hide('license-row-hsm');
+      show('license-overage-banner');
+    } else if (tier === 'advanced') {
+      show('section-vuln-gov');
+      hide('card-sig-control');
+      hide('license-row-hsm');
+      show('license-overage-banner');
+    } else {
+      show('section-vuln-gov');
+      show('card-sig-control');
+      show('license-row-hsm');
+      hide('license-overage-banner');
+    }
+
+    // Update license chart data + height
+    updateLicenseChart(tier);
+  }
+
+  // ── Tab switching ───────────────────────────────────────────────
+  function switchTab(name) {
+    ['overview', 'action'].forEach(function(t) {
+      var btn = document.getElementById('tab-' + t);
+      var panel = document.getElementById('panel-' + t);
+      var active = t === name;
+      btn.setAttribute('aria-selected', String(active));
+      btn.className = active
+        ? 'border-b-2 px-5 py-2.5 text-[14px] font-medium transition border-[#0048ac] text-[#0048ac]'
+        : 'border-b-2 px-5 py-2.5 text-[14px] font-medium transition border-transparent text-[#636a6e] hover:border-[#c1c8cd] hover:text-[#353535]';
+      if (active) panel.classList.add('active'); else panel.classList.remove('active');
+    });
+  }
+
+  // ── AG Charts ──────────────────────────────────────────────────
+  var signingChart = null;
+  var licenseChart = null;
+  var currentTier = 'essentials';
+
+  var LICENSE_DATA = {
+    essentials: {
+      data: [
+        { label: 'Repositories',        consumed: 90, remaining: 10 },
+        { label: 'Test sig units',       consumed: 25, remaining: 75 },
+        { label: 'Production sig units', consumed: 81, remaining: 19 },
+      ],
+      fills: ['#f57c00', '#22c55e', '#f57c00'],
+    },
+    advanced: {
+      data: [
+        { label: 'Repositories',        consumed: 90, remaining: 10 },
+        { label: 'Test sig units',       consumed: 25, remaining: 75 },
+        { label: 'Production sig units', consumed: 81, remaining: 19 },
+      ],
+      fills: ['#f57c00', '#22c55e', '#f57c00'],
+    },
+    premium: {
+      data: [
+        { label: 'Repositories',        consumed: 90, remaining: 10 },
+        { label: 'Test sig units',       consumed: 25, remaining: 75 },
+        { label: 'HSM keypair units',    consumed: 85, remaining: 15 },
+        { label: 'Production sig units', consumed: 81, remaining: 19 },
+      ],
+      fills: ['#f57c00', '#22c55e', '#f57c00', '#f57c00'],
+    },
+  };
+
+  function createLicenseChart(tier) {
+    var tierData = LICENSE_DATA[tier];
+    var el = document.getElementById('chart-license-usage');
+    var h = tierData.data.length <= 3 ? 180 : 230;
+    el.style.height = h + 'px';
+    el.innerHTML = '';
+    licenseChart = agCharts.AgCharts.create({
+      container: el,
+      data: tierData.data,
+      series: [
+        { type: 'bar', direction: 'horizontal', xKey: 'label', yKey: 'consumed',  yName: 'Consumed',  stacked: true, fill: '#f57c00' },
+        { type: 'bar', direction: 'horizontal', xKey: 'label', yKey: 'remaining', yName: 'Remaining', stacked: true, fill: '#e5e7eb', stroke: '#e5e7eb' },
+      ],
+      background: { fill: 'transparent' },
+      legend: { enabled: false },
+      padding: { top: 6, right: 6, bottom: 6, left: 6 },
+    });
+  }
+
+  function updateLicenseChart(tier) {
+    currentTier = tier;
+    if (!licenseChart) return;
+    createLicenseChart(tier);
+  }
+
+  function initCharts() {
+    // ── Signing volume — area (Successful) + line (Failed) ──
+    signingChart = agCharts.AgCharts.create({
+      container: document.getElementById('chart-signing-volume'),
+      data: [
+        { month: 'Oct', successful: 8200, failed: 80 },
+        { month: 'Nov', successful: 7800, failed: 90 },
+        { month: 'Dec', successful: 8100, failed: 95 },
+        { month: 'Jan', successful: 8500, failed: 95 },
+        { month: 'Feb', successful: 8900, failed: 80 },
+        { month: 'Mar', successful: 10000, failed: 100 },
+      ],
+      series: [
+        {
+          type: 'area',
+          xKey: 'month',
+          yKey: 'successful',
+          yName: 'Successful',
+          fill: 'rgba(22,163,74,0.10)',
+          stroke: '#16a34a',
+          strokeWidth: 2,
+          marker: { enabled: false },
+        },
+        {
+          type: 'line',
+          xKey: 'month',
+          yKey: 'failed',
+          yName: 'Failed',
+          stroke: '#f57c00',
+          strokeWidth: 2,
+          marker: { enabled: true, size: 5, fill: '#f57c00', stroke: '#f57c00' },
+        },
+      ],
+      axes: [
+        {
+          type: 'category',
+          position: 'bottom',
+          label: { fontSize: 11, color: '#636a6e' },
+        },
+        {
+          type: 'number',
+          position: 'left',
+          label: {
+            fontSize: 11,
+            color: '#636a6e',
+            formatter: function(p) {
+              return p.value >= 1000 ? (p.value / 1000) + 'k' : String(p.value);
+            },
+          },
+        },
+      ],
+      background: { fill: 'transparent' },
+      legend: { enabled: false },
+      padding: { top: 6, right: 6, bottom: 6, left: 6 },
+    });
+
+    // ── License usage — deferred so grid layout is settled before AG Charts measures the container ──
+    setTimeout(function() { createLicenseChart(currentTier); }, 200);
+  }
+
+  // ── Signature usage history ────────────────────────────────────
+  var SIG_HISTORY_ROWS = [
+    // Last 3 months
+    { month: 'March 2026',     completed: '10,000', failed: '100', rate: '1.0%', trend: '↑ 10%', trendCls: 'font-medium text-[#f57c00]', pace: 'Above expected', paceCls: 'font-medium text-[#f57c00]' },
+    { month: 'February 2026',  completed: '8,900',  failed: '80',  rate: '0.9%', trend: '↑ 4%',  trendCls: 'font-medium text-[#16a34a]', pace: 'On track',       paceCls: 'text-[#636a6e]' },
+    { month: 'January 2026',   completed: '8,500',  failed: '95',  rate: '1.1%', trend: '—',      trendCls: 'text-[#636a6e]',             pace: 'On track',       paceCls: 'text-[#636a6e]' },
+    // Last 6 months (rows 4–6)
+    { month: 'December 2025',  completed: '9,200',  failed: '110', rate: '1.2%', trend: '↑ 8%',  trendCls: 'font-medium text-[#f57c00]', pace: 'Above expected', paceCls: 'font-medium text-[#f57c00]' },
+    { month: 'November 2025',  completed: '7,800',  failed: '60',  rate: '0.8%', trend: '↓ 5%',  trendCls: 'text-[#636a6e]',             pace: 'On track',       paceCls: 'text-[#636a6e]' },
+    { month: 'October 2025',   completed: '8,100',  failed: '75',  rate: '0.9%', trend: '↑ 2%',  trendCls: 'font-medium text-[#16a34a]', pace: 'On track',       paceCls: 'text-[#636a6e]' },
+    // Last 12 months (rows 7–12)
+    { month: 'September 2025', completed: '7,500',  failed: '55',  rate: '0.7%', trend: '↓ 3%',  trendCls: 'text-[#636a6e]',             pace: 'On track',       paceCls: 'text-[#636a6e]' },
+    { month: 'August 2025',    completed: '8,300',  failed: '90',  rate: '1.1%', trend: '↑ 5%',  trendCls: 'font-medium text-[#f57c00]', pace: 'Above expected', paceCls: 'font-medium text-[#f57c00]' },
+    { month: 'July 2025',      completed: '7,200',  failed: '45',  rate: '0.6%', trend: '↓ 8%',  trendCls: 'text-[#636a6e]',             pace: 'On track',       paceCls: 'text-[#636a6e]' },
+    { month: 'June 2025',      completed: '6,900',  failed: '70',  rate: '1.0%', trend: '↑ 1%',  trendCls: 'font-medium text-[#16a34a]', pace: 'On track',       paceCls: 'text-[#636a6e]' },
+    { month: 'May 2025',       completed: '6,500',  failed: '50',  rate: '0.8%', trend: '↓ 2%',  trendCls: 'text-[#636a6e]',             pace: 'On track',       paceCls: 'text-[#636a6e]' },
+    { month: 'April 2025',     completed: '6,100',  failed: '40',  rate: '0.7%', trend: '—',      trendCls: 'text-[#636a6e]',             pace: 'On track',       paceCls: 'text-[#636a6e]' },
+  ];
+
+  function renderSigHistory(count) {
+    var tbody  = document.getElementById('sig-history-tbody');
+    var scroll = document.getElementById('sig-history-scroll');
+    var rows   = SIG_HISTORY_ROWS.slice(0, count);
+    tbody.innerHTML = rows.map(function(r) {
+      return '<tr class="bg-white hover:bg-[#f9fafb]">' +
+        '<td class="px-3 py-3 text-[13px] font-medium text-[#353535]">'           + r.month     + '</td>' +
+        '<td class="px-3 py-3 text-[13px] font-semibold text-[#353535]">'         + r.completed + '</td>' +
+        '<td class="px-3 py-3 text-[13px] font-medium text-[#f57c00]">'           + r.failed    + '</td>' +
+        '<td class="px-3 py-3 text-[13px] text-[#353535]">'                       + r.rate      + '</td>' +
+        '<td class="px-3 py-3 text-[13px] ' + r.trendCls + '">'                   + r.trend     + '</td>' +
+        '<td class="px-3 py-3 text-[13px] ' + r.paceCls  + '">'                   + r.pace      + '</td>' +
+        '</tr>';
+    }).join('');
+    if (count > 3) {
+      scroll.style.maxHeight = '212px';
+      scroll.style.overflowY = 'auto';
+    } else {
+      scroll.style.maxHeight = '';
+      scroll.style.overflowY = '';
+    }
+  }
+
+  function initSigHistory() {
+    renderSigHistory(3);
+    document.getElementById('sig-history-period').addEventListener('change', function() {
+      renderSigHistory(parseInt(this.value, 10));
+    });
+  }
+
+  window.addEventListener('DOMContentLoaded', function() {
+    initCharts();
+    setTier('essentials');
+    initSigHistory();
+  });
+</script>
+
+</body>
+</html>
