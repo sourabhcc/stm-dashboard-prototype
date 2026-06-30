@@ -164,30 +164,34 @@
         </div>
       </div>
 
-      <!-- Row 2: Filters + Actions (tier-driven) -->
+      <!-- Row 2: Filters + Actions -->
       <div class="flex flex-wrap items-center gap-2 pb-4">
 
-        <!-- CONTRACT PERIOD — always shown; disabled for Essentials -->
-        <div id="filter-contract" class="flex items-center gap-1.5">
-          <label class="text-[12px] font-medium text-[#636a6e]" for="sel-contract">Contract period</label>
-          <select id="sel-contract" class="h-9 rounded-[4px] border border-[#d6dce1] bg-white px-3 text-[14px] text-[#353535]">
-            <option>Jan 2024 – Dec 2024</option>
-            <option>Jan 2025 – Dec 2025</option>
-            <option selected>Jan 2026 – Dec 2026</option>
-          </select>
-        </div>
+        <!-- ALL BUSINESS UNITS — always shown; disabled for Essentials -->
+        <select id="sel-business-units" class="h-9 rounded-[4px] border border-[#d6dce1] bg-white px-3 text-[14px] text-[#353535]">
+          <option>All business units</option>
+          <option>Engineering</option>
+          <option>Security</option>
+          <option>Finance</option>
+          <option>Operations</option>
+          <option>Platform</option>
+        </select>
 
-        <!-- CATEGORY — hidden for Essentials -->
-        <div id="filter-category" class="flex items-center gap-1.5" style="display:none!important;">
-          <label class="text-[12px] font-medium text-[#636a6e]" for="sel-category">Category</label>
-          <select id="sel-category" class="h-9 rounded-[4px] border border-[#d6dce1] bg-white px-3 text-[14px] text-[#353535]">
-            <option>Production</option>
-            <option>Test</option>
-          </select>
+        <!-- SEPARATOR -->
+        <div class="h-5 w-px bg-[#d6dce1]"></div>
+
+        <!-- ALL | PUBLIC | PRIVATE toggle -->
+        <div class="flex items-center">
+          <button id="vis-all" type="button" onclick="setVisibility('all')" class="px-2.5 text-[14px] font-semibold text-[#353535]">All</button>
+          <span class="text-[14px] text-[#d6dce1]">|</span>
+          <button id="vis-public" type="button" onclick="setVisibility('public')" class="px-2.5 text-[14px] text-[#636a6e] hover:text-[#353535]">Public</button>
+          <span class="text-[14px] text-[#d6dce1]">|</span>
+          <button id="vis-private" type="button" onclick="setVisibility('private')" class="px-2.5 text-[14px] text-[#636a6e] hover:text-[#353535]">Private</button>
         </div>
 
         <!-- USER — Premium only -->
         <div id="filter-user" class="flex items-center gap-1.5" style="display:none!important;">
+          <div class="h-5 w-px bg-[#d6dce1]"></div>
           <label class="text-[12px] font-medium text-[#636a6e]" for="sel-user">User</label>
           <select id="sel-user" class="h-9 rounded-[4px] border border-[#d6dce1] bg-white px-3 text-[14px] text-[#353535]">
             <option>All users</option>
@@ -214,19 +218,19 @@
         <!-- Spacer -->
         <div class="flex-1"></div>
 
-        <!-- EXPORT REPORT — Premium only -->
-        <button id="btn-export" type="button" style="display:none!important;"
+        <!-- EXPORT REPORT — always visible -->
+        <button id="btn-export" type="button"
           class="inline-flex items-center gap-1.5 rounded-[4px] border border-[#0174C3] bg-white px-4 text-[14px] font-medium text-[#0174C3] hover:bg-[#e8f3fb] h-9">
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
           Export Report
         </button>
 
-        <!-- Icon buttons — always visible -->
+        <!-- Icon buttons -->
         <div class="h-5 w-px bg-[#d6dce1]"></div>
         <button type="button" aria-label="Manage widgets" onclick="openWidgetManager()" class="inline-flex items-center justify-center rounded-[4px] border border-[#0174C3] bg-[#0174C3] text-white hover:bg-[#0161a8] h-9 w-9">
           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M3 12h18"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
         </button>
-        <button type="button" aria-label="Refresh" class="inline-flex items-center justify-center rounded-[4px] border border-[#0174C3] bg-white text-[#0174C3] hover:bg-[#e8f3fb] h-9 w-9">
+        <button type="button" aria-label="Refresh" class="inline-flex items-center justify-center rounded-[4px] border border-[#d6dce1] bg-white text-[#636a6e] hover:bg-[#f0f3f5] h-9 w-9">
           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
         </button>
       </div>
@@ -865,14 +869,14 @@
 
     // Filter bar
     if (tier === 'essentials') {
-      show('filter-contract'); setDisabled('sel-contract', true);
-      hide('filter-category'); hide('filter-user'); hide('filter-team'); hide('btn-export');
+      setDisabled('sel-business-units', true);
+      hide('filter-user'); hide('filter-team');
     } else if (tier === 'advanced') {
-      show('filter-contract'); setDisabled('sel-contract', false);
-      show('filter-category'); hide('filter-user'); hide('filter-team'); hide('btn-export');
+      setDisabled('sel-business-units', false);
+      hide('filter-user'); hide('filter-team');
     } else {
-      show('filter-contract'); setDisabled('sel-contract', false);
-      show('filter-category'); show('filter-user'); show('filter-team'); show('btn-export');
+      setDisabled('sel-business-units', false);
+      show('filter-user'); show('filter-team');
     }
 
     // Section / card visibility
@@ -897,6 +901,17 @@
 
     // Update license chart data + height
     updateLicenseChart(tier);
+  }
+
+  // ── Visibility toggle (All | Public | Private) ─────────────────
+  function setVisibility(vis) {
+    ['all', 'public', 'private'].forEach(function(v) {
+      var btn = document.getElementById('vis-' + v);
+      if (!btn) return;
+      btn.className = 'px-2.5 text-[14px] ' + (v === vis
+        ? 'font-semibold text-[#353535]'
+        : 'text-[#636a6e] hover:text-[#353535]');
+    });
   }
 
   // ── Tab switching ───────────────────────────────────────────────
