@@ -335,8 +335,13 @@
               <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Total repositories</p>
               <p class="mt-2 text-[38px] font-semibold leading-none text-[#1a2332]">1,247</p>
               <p class="mt-1.5 text-[13px] text-[#636a6e]">repositories tracked</p>
-              <div class="mt-5 border-t border-[#e7ebef] pt-4">
-                <a href="#" class="text-[13px] font-medium text-[#0174C3] hover:underline">View repositories →</a>
+              <div id="chart-rm-total" class="mt-4" style="height:48px;width:100%;"></div>
+              <div class="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-[#636a6e]">
+                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#22c55e]"></span><strong class="font-semibold text-[#353535]">1,082</strong> Connected</span>
+                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#d1d5db]"></span><strong class="font-semibold text-[#353535]">165</strong> Not connected</span>
+              </div>
+              <div class="mt-4 border-t border-[#e7ebef] pt-4">
+                <a href="#" class="text-[13px] font-medium text-[#0174C3] hover:underline">Connect repositories →</a>
               </div>
             </div>
           </div>
@@ -348,8 +353,13 @@
               <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Monitored repositories</p>
               <p class="mt-2 text-[38px] font-semibold leading-none text-[#1a2332]">891</p>
               <p class="mt-1.5 text-[13px] text-[#636a6e]">72% of total repositories</p>
-              <div class="mt-5 border-t border-[#e7ebef] pt-4">
-                <a href="#" class="text-[13px] font-medium text-[#0174C3] hover:underline">Manage repositories →</a>
+              <div id="chart-rm-monitored" class="mt-4" style="height:48px;width:100%;"></div>
+              <div class="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-[#636a6e]">
+                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#0174C3]"></span><strong class="font-semibold text-[#353535]">891</strong> Monitored</span>
+                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#f59e0b]"></span><strong class="font-semibold text-[#353535]">356</strong> Not monitored</span>
+              </div>
+              <div class="mt-4 border-t border-[#e7ebef] pt-4">
+                <a href="#" class="text-[13px] font-medium text-[#0174C3] hover:underline">Manage monitoring →</a>
               </div>
             </div>
           </div>
@@ -361,7 +371,12 @@
               <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">High &amp; Critical alerts</p>
               <p class="mt-2 text-[38px] font-semibold leading-none text-[#dc2626]">23</p>
               <p class="mt-1.5 text-[13px] text-[#636a6e]">require immediate attention</p>
-              <div class="mt-5 border-t border-[#e7ebef] pt-4">
+              <div id="chart-rm-alerts" class="mt-4" style="height:48px;width:100%;"></div>
+              <div class="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-[#636a6e]">
+                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#dc2626]"></span><strong class="font-semibold text-[#353535]">15</strong> Critical</span>
+                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#f59e0b]"></span><strong class="font-semibold text-[#353535]">8</strong> High</span>
+              </div>
+              <div class="mt-4 border-t border-[#e7ebef] pt-4">
                 <a href="#" class="text-[13px] font-medium text-[#0174C3] hover:underline">View alerts →</a>
               </div>
             </div>
@@ -384,7 +399,13 @@
               <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Pending review</p>
               <p class="mt-2 text-[38px] font-semibold leading-none text-[#1a2332]">47</p>
               <p class="mt-1.5 text-[13px] text-[#636a6e]">vulnerabilities awaiting decision</p>
-              <div class="mt-5 border-t border-[#e7ebef] pt-4">
+              <div id="chart-vg-pending" class="mt-4" style="height:48px;width:100%;"></div>
+              <div class="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-[#636a6e]">
+                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#dc2626]"></span><strong class="font-semibold text-[#353535]">18</strong> Critical</span>
+                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#f59e0b]"></span><strong class="font-semibold text-[#353535]">20</strong> High</span>
+                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#fbbf24]"></span><strong class="font-semibold text-[#353535]">9</strong> Medium</span>
+              </div>
+              <div class="mt-4 border-t border-[#e7ebef] pt-4">
                 <a href="#" class="text-[13px] font-medium text-[#0174C3] hover:underline">Review vulnerabilities →</a>
               </div>
             </div>
@@ -397,7 +418,13 @@
               <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Decisions made</p>
               <p class="mt-2 text-[38px] font-semibold leading-none text-[#1a2332]">312</p>
               <p class="mt-1.5 text-[13px] text-[#636a6e]">in the current contract period</p>
-              <div class="mt-5 border-t border-[#e7ebef] pt-4">
+              <div id="chart-vg-decisions" class="mt-4" style="height:48px;width:100%;"></div>
+              <div class="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-[#636a6e]">
+                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#22c55e]"></span><strong class="font-semibold text-[#353535]">145</strong> Fixed</span>
+                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#f59e0b]"></span><strong class="font-semibold text-[#353535]">120</strong> Accepted risk</span>
+                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#94a3b8]"></span><strong class="font-semibold text-[#353535]">47</strong> Suppressed</span>
+              </div>
+              <div class="mt-4 border-t border-[#e7ebef] pt-4">
                 <a href="#" class="text-[13px] font-medium text-[#0174C3] hover:underline">View decisions →</a>
               </div>
             </div>
@@ -410,7 +437,12 @@
               <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Suppressed findings</p>
               <p class="mt-2 text-[38px] font-semibold leading-none text-[#1a2332]">28</p>
               <p class="mt-1.5 text-[13px] text-[#636a6e]">actively suppressed</p>
-              <div class="mt-5 border-t border-[#e7ebef] pt-4">
+              <div id="chart-vg-suppressed" class="mt-4" style="height:48px;width:100%;"></div>
+              <div class="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-[#636a6e]">
+                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#94a3b8]"></span><strong class="font-semibold text-[#353535]">20</strong> Active</span>
+                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#e2e8f0]"></span><strong class="font-semibold text-[#353535]">8</strong> Expired</span>
+              </div>
+              <div class="mt-4 border-t border-[#e7ebef] pt-4">
                 <a href="#" class="text-[13px] font-medium text-[#0174C3] hover:underline">View suppressed →</a>
               </div>
             </div>
@@ -856,11 +888,13 @@
       hide('card-sig-control');
       hide('license-row-hsm');
       show('license-overage-banner');
+      initVgCharts();
     } else {
       show('section-vuln-gov');
       show('card-sig-control');
       show('license-row-hsm');
       hide('license-overage-banner');
+      initVgCharts();
     }
 
     // Update license chart data + height
@@ -881,10 +915,56 @@
     });
   }
 
+  function initVgCharts() {
+    if (vgChartsInit) return;
+    vgChartsInit = true;
+    setTimeout(function() {
+      createMiniBar('chart-vg-pending', [
+        { v: 18, name: 'Critical', color: '#dc2626' },
+        { v: 20, name: 'High',     color: '#f59e0b' },
+        { v: 9,  name: 'Medium',   color: '#fbbf24' },
+      ]);
+      createMiniBar('chart-vg-decisions', [
+        { v: 145, name: 'Fixed',         color: '#22c55e' },
+        { v: 120, name: 'Accepted risk', color: '#f59e0b' },
+        { v: 47,  name: 'Suppressed',    color: '#94a3b8' },
+      ]);
+      createMiniBar('chart-vg-suppressed', [
+        { v: 20, name: 'Active',  color: '#94a3b8' },
+        { v: 8,  name: 'Expired', color: '#e2e8f0' },
+      ]);
+    }, 200);
+  }
+
+  // ── Mini bar chart helper (horizontal stacked, no axes/labels) ──
+  function createMiniBar(id, segments) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.innerHTML = '';
+    var row = { _: '' };
+    segments.forEach(function(s, i) { row['v' + i] = s.v; });
+    agCharts.AgCharts.create({
+      container: el,
+      locale: 'en-US',
+      data: [row],
+      series: segments.map(function(s, i) {
+        return { type: 'bar', direction: 'horizontal', xKey: '_', yKey: 'v' + i, yName: s.name, stacked: true, fill: s.color, stroke: s.color, strokeWidth: 0 };
+      }),
+      axes: [
+        { type: 'category', position: 'left',   label: { color: 'transparent', fontSize: 1 }, gridLine: { style: [] } },
+        { type: 'number',   position: 'bottom',  label: { color: 'transparent', fontSize: 1 }, gridLine: { style: [] } },
+      ],
+      background: { fill: 'transparent' },
+      legend: { enabled: false },
+      padding: { top: 0, right: 0, bottom: 0, left: 0 },
+    });
+  }
+
   // ── AG Charts ──────────────────────────────────────────────────
   var signingChart = null;
   var licenseChart = null;
   var currentTier = 'essentials';
+  var vgChartsInit = false;
 
   var LICENSE_DATA = {
     essentials: {
@@ -995,8 +1075,24 @@
       padding: { top: 6, right: 6, bottom: 6, left: 6 },
     });
 
-    // ── License usage — deferred so grid layout is settled before AG Charts measures the container ──
+    // ── License usage — deferred so layout is settled ──
     setTimeout(function() { createLicenseChart(currentTier); }, 200);
+
+    // ── Release monitoring mini bars ──
+    setTimeout(function() {
+      createMiniBar('chart-rm-total', [
+        { v: 1082, name: 'Connected',     color: '#22c55e' },
+        { v: 165,  name: 'Not connected', color: '#d1d5db' },
+      ]);
+      createMiniBar('chart-rm-monitored', [
+        { v: 891, name: 'Monitored',     color: '#0174C3' },
+        { v: 356, name: 'Not monitored', color: '#f59e0b' },
+      ]);
+      createMiniBar('chart-rm-alerts', [
+        { v: 15, name: 'Critical', color: '#dc2626' },
+        { v: 8,  name: 'High',     color: '#f59e0b' },
+      ]);
+    }, 200);
   }
 
   // ── Get Started view ───────────────────────────────────────────
