@@ -1035,6 +1035,14 @@
           stroke: '#16a34a',
           strokeWidth: 2,
           marker: { enabled: true, size: 4, fill: '#16a34a', stroke: '#16a34a' },
+          tooltip: {
+            renderer: function(p) {
+              return '<div style="overflow:hidden;border-radius:3px;font-family:Roboto,sans-serif;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,0.15)">'
+                + '<div style="background:#16a34a;color:#fff;padding:4px 10px;font-weight:500">' + (p.yName || 'Successful') + '</div>'
+                + '<div style="padding:4px 10px;background:#fff;color:#353535">' + p.xValue + ': ' + Number(p.yValue).toLocaleString('en-US') + '</div>'
+                + '</div>';
+            }
+          },
         },
         {
           type: 'line',
