@@ -36,6 +36,16 @@
     <div class="text-base font-medium">digicert<span class="font-light">ONE</span></div>
   </div>
   <div class="flex items-center gap-4">
+    <!-- Tier switcher -->
+    <div class="inline-flex items-center rounded-[6px] bg-white/20 p-[3px]" role="radiogroup" aria-label="Tier">
+      <button type="button" role="radio" id="tier-essentials" onclick="setTier('essentials')"
+        class="rounded-[4px] px-3 py-1 text-[13px] font-medium transition-all bg-white text-[#0174C3] shadow-[0_1px_3px_rgba(0,0,0,0.12)]">Essentials</button>
+      <button type="button" role="radio" id="tier-advanced" onclick="setTier('advanced')"
+        class="rounded-[4px] px-3 py-1 text-[13px] font-medium transition-all text-white/80 hover:text-white hover:bg-white/10">Advanced</button>
+      <button type="button" role="radio" id="tier-premium" onclick="setTier('premium')"
+        class="rounded-[4px] px-3 py-1 text-[13px] font-medium transition-all text-white/80 hover:text-white hover:bg-white/10">Premium</button>
+    </div>
+    <div class="h-5 w-px bg-white/30"></div>
     <button class="rounded p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70" aria-label="Notifications">
       <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
     </button>
@@ -145,27 +155,16 @@
     <!-- PAGE HEADER -->
     <header class="border-b border-[#d6dce1] pb-0">
 
-      <!-- Row 1: Title + Tier selector -->
-      <div class="flex items-center gap-4 pb-4">
+      <!-- Row 1: Title -->
+      <div class="flex items-center pb-4">
         <div class="min-w-0">
-          <div class="flex items-center gap-3">
-            <h1 class="text-[26px] font-medium leading-9 tracking-[-0.01em] text-[#1a2332]">Dashboard</h1>
-            <!-- Tier selector -->
-            <div class="inline-flex items-center rounded-[6px] border border-[#d6dce1] bg-[#f0f3f5] p-[3px]" role="radiogroup" aria-label="Tier">
-              <button type="button" role="radio" id="tier-essentials" onclick="setTier('essentials')"
-                class="rounded-[4px] px-3 py-1 text-[13px] font-medium transition-all bg-white text-[#353535] shadow-[0_1px_3px_rgba(0,0,0,0.12)]">Essentials</button>
-              <button type="button" role="radio" id="tier-advanced" onclick="setTier('advanced')"
-                class="rounded-[4px] px-3 py-1 text-[13px] font-medium transition-all text-[#636a6e] hover:text-[#353535]">Advanced</button>
-              <button type="button" role="radio" id="tier-premium" onclick="setTier('premium')"
-                class="rounded-[4px] px-3 py-1 text-[13px] font-medium transition-all text-[#636a6e] hover:text-[#353535]">Premium</button>
-            </div>
-          </div>
+          <h1 class="text-[26px] font-medium leading-9 tracking-[-0.01em] text-[#1a2332]">Dashboard</h1>
           <p class="mt-0.5 text-[14px] leading-5 text-[#636a6e]">Software Trust Manager · Code signing and certificate lifecycle management</p>
         </div>
       </div>
 
-      <!-- Row 2: Filters + Actions (tier-driven) -->
-      <div class="flex flex-wrap items-center gap-2 pb-4">
+      <!-- Row 2: Filters + Actions (tier-driven) — right-aligned -->
+      <div class="flex flex-wrap items-center justify-end gap-2 pb-4">
 
         <!-- CONTRACT PERIOD — always shown; disabled for Essentials -->
         <div id="filter-contract" class="flex items-center gap-1.5">
@@ -210,9 +209,6 @@
             <option>Edge Ops</option>
           </select>
         </div>
-
-        <!-- Spacer -->
-        <div class="flex-1"></div>
 
         <!-- EXPORT REPORT — Premium only -->
         <button id="btn-export" type="button" style="display:none!important;"
@@ -847,8 +843,8 @@
 
 <script>
   // ── Tier switching ──────────────────────────────────────────────
-  var TIER_ACTIVE   = 'rounded-[4px] px-3 py-1 text-[13px] font-medium transition-all bg-white text-[#353535] shadow-[0_1px_3px_rgba(0,0,0,0.12)]';
-  var TIER_INACTIVE = 'rounded-[4px] px-3 py-1 text-[13px] font-medium transition-all text-[#636a6e] hover:text-[#353535]';
+  var TIER_ACTIVE   = 'rounded-[4px] px-3 py-1 text-[13px] font-medium transition-all bg-white text-[#0174C3] shadow-[0_1px_3px_rgba(0,0,0,0.12)]';
+  var TIER_INACTIVE = 'rounded-[4px] px-3 py-1 text-[13px] font-medium transition-all text-white/80 hover:text-white hover:bg-white/10';
 
   function show(id) { var el = document.getElementById(id); if (el) el.style.removeProperty('display'); }
   function hide(id) { var el = document.getElementById(id); if (el) el.style.setProperty('display', 'none', 'important'); }
