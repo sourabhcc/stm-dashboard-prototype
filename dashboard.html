@@ -397,16 +397,15 @@
             <div class="h-[3px] bg-[#f59e0b]"></div>
             <div class="flex flex-1 flex-col p-5">
               <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Pending review</p>
-              <p class="mt-2 text-[38px] font-semibold leading-none text-[#1a2332]">47</p>
-              <p class="mt-1.5 text-[13px] text-[#636a6e]">vulnerabilities awaiting decision</p>
+              <p class="mt-2 text-[38px] font-semibold leading-none text-[#1a2332]">10</p>
+              <p class="mt-1.5 text-[13px] text-[#636a6e]">Reviews awaiting your action</p>
               <div id="chart-vg-pending" class="mt-4" style="height:48px;width:100%;"></div>
               <div class="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-[#636a6e]">
-                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#dc2626]"></span><strong class="font-semibold text-[#353535]">18</strong> Critical</span>
-                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#f59e0b]"></span><strong class="font-semibold text-[#353535]">20</strong> High</span>
-                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#fbbf24]"></span><strong class="font-semibold text-[#353535]">9</strong> Medium</span>
+                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#f59e0b]"></span><strong class="font-semibold text-[#353535]">10</strong> Pending review</span>
+                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#1e40af]"></span><strong class="font-semibold text-[#353535]">8</strong> Review completed</span>
               </div>
               <div class="mt-4 border-t border-[#e7ebef] pt-4">
-                <a href="#" class="text-[13px] font-medium text-[#0174C3] hover:underline">Review vulnerabilities →</a>
+                <a href="#" class="text-[13px] font-medium text-[#0174C3] hover:underline">Review findings →</a>
               </div>
             </div>
           </div>
@@ -416,16 +415,15 @@
             <div class="h-[3px] bg-[#22c55e]"></div>
             <div class="flex flex-1 flex-col p-5">
               <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Decisions made</p>
-              <p class="mt-2 text-[38px] font-semibold leading-none text-[#1a2332]">312</p>
-              <p class="mt-1.5 text-[13px] text-[#636a6e]">in the current contract period</p>
+              <p class="mt-2 text-[38px] font-semibold leading-none text-[#1a2332]">174</p>
+              <p class="mt-1.5 text-[13px] text-[#636a6e]">Accepted risks and invalid findings</p>
               <div id="chart-vg-decisions" class="mt-4" style="height:48px;width:100%;"></div>
               <div class="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-[#636a6e]">
-                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#22c55e]"></span><strong class="font-semibold text-[#353535]">145</strong> Fixed</span>
-                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#f59e0b]"></span><strong class="font-semibold text-[#353535]">120</strong> Accepted risk</span>
-                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#94a3b8]"></span><strong class="font-semibold text-[#353535]">47</strong> Suppressed</span>
+                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#f59e0b]"></span><strong class="font-semibold text-[#353535]">130</strong> Risk accepted</span>
+                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#1e40af]"></span><strong class="font-semibold text-[#353535]">44</strong> Invalid findings</span>
               </div>
               <div class="mt-4 border-t border-[#e7ebef] pt-4">
-                <a href="#" class="text-[13px] font-medium text-[#0174C3] hover:underline">View decisions →</a>
+                <a href="#" class="text-[13px] font-medium text-[#0174C3] hover:underline">View all →</a>
               </div>
             </div>
           </div>
@@ -435,15 +433,15 @@
             <div class="h-[3px] bg-[#94a3b8]"></div>
             <div class="flex flex-1 flex-col p-5">
               <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Suppressed findings</p>
-              <p class="mt-2 text-[38px] font-semibold leading-none text-[#1a2332]">28</p>
-              <p class="mt-1.5 text-[13px] text-[#636a6e]">actively suppressed</p>
+              <p class="mt-2 text-[38px] font-semibold leading-none text-[#1a2332]">32</p>
+              <p class="mt-1.5 text-[13px] text-[#636a6e]">Findings suppressed from active alerts</p>
               <div id="chart-vg-suppressed" class="mt-4" style="height:48px;width:100%;"></div>
               <div class="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px] text-[#636a6e]">
-                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#94a3b8]"></span><strong class="font-semibold text-[#353535]">20</strong> Active</span>
-                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#e2e8f0]"></span><strong class="font-semibold text-[#353535]">8</strong> Expired</span>
+                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#f59e0b]"></span><strong class="font-semibold text-[#353535]">10</strong> Risks accepted</span>
+                <span class="flex items-center gap-1.5"><span class="inline-block h-2 w-2 rounded-full bg-[#1e40af]"></span><strong class="font-semibold text-[#353535]">22</strong> Invalid findings</span>
               </div>
               <div class="mt-4 border-t border-[#e7ebef] pt-4">
-                <a href="#" class="text-[13px] font-medium text-[#0174C3] hover:underline">View suppressed →</a>
+                <a href="#" class="text-[13px] font-medium text-[#0174C3] hover:underline">View all →</a>
               </div>
             </div>
           </div>
@@ -920,18 +918,16 @@
     vgChartsInit = true;
     setTimeout(function() {
       createMiniBar('chart-vg-pending', [
-        { v: 18, name: 'Critical', color: '#dc2626' },
-        { v: 20, name: 'High',     color: '#f59e0b' },
-        { v: 9,  name: 'Medium',   color: '#fbbf24' },
+        { v: 10, name: 'Pending review',   color: '#f59e0b' },
+        { v: 8,  name: 'Review completed', color: '#1e40af' },
       ]);
       createMiniBar('chart-vg-decisions', [
-        { v: 145, name: 'Fixed',         color: '#22c55e' },
-        { v: 120, name: 'Accepted risk', color: '#f59e0b' },
-        { v: 47,  name: 'Suppressed',    color: '#94a3b8' },
+        { v: 130, name: 'Risk accepted',   color: '#f59e0b' },
+        { v: 44,  name: 'Invalid findings', color: '#1e40af' },
       ]);
       createMiniBar('chart-vg-suppressed', [
-        { v: 20, name: 'Active',  color: '#94a3b8' },
-        { v: 8,  name: 'Expired', color: '#e2e8f0' },
+        { v: 10, name: 'Risks accepted',   color: '#f59e0b' },
+        { v: 22, name: 'Invalid findings', color: '#1e40af' },
       ]);
     }, 200);
   }
