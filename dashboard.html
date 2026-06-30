@@ -6,16 +6,16 @@
   <title>Software Trust – Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      theme: { fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] } }
+      theme: { fontFamily: { sans: ['Roboto', 'sans-serif'], mono: ['Roboto Mono', 'monospace'] } }
     }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/ag-charts-community@9.3.2/dist/umd/ag-charts-community.min.js"></script>
   <style>
-    * { font-family: 'Plus Jakarta Sans', sans-serif; }
+    * { font-family: 'Roboto', sans-serif; }
     ::-webkit-scrollbar { width: 5px; height: 5px; }
     ::-webkit-scrollbar-thumb { background: #c1c8cd; border-radius: 3px; }
     ::-webkit-scrollbar-track { background: transparent; }
@@ -28,7 +28,7 @@
 <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-[#0D3B8C] focus:shadow-lg">Skip to main content</a>
 
 <!-- ═══ TOP HEADER ═══ -->
-<header class="fixed left-0 right-0 top-0 z-30 flex h-12 items-center justify-between bg-[#0174C3] px-4 text-white shadow-sm">
+<header class="fixed left-0 right-0 top-0 z-30 flex h-14 items-center justify-between bg-[#1976D2] px-4 text-white shadow-sm">
   <div class="flex items-center gap-5">
     <button class="rounded p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70" aria-label="Open navigation">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
@@ -39,11 +39,11 @@
     <!-- Tier switcher -->
     <div class="inline-flex items-center rounded-[6px] bg-white/20 p-[3px]" role="radiogroup" aria-label="Tier">
       <button type="button" role="radio" id="tier-essentials" onclick="setTier('essentials')"
-        class="rounded-[4px] px-3 py-1 text-[13px] font-medium transition-all bg-white text-[#0174C3] shadow-[0_1px_3px_rgba(0,0,0,0.12)]">Essentials</button>
+        class="rounded-[3px] px-3 py-1 text-[13px] font-medium transition-all bg-white text-[#0174C3] shadow-[0_1px_3px_rgba(0,0,0,0.12)]">Essentials</button>
       <button type="button" role="radio" id="tier-advanced" onclick="setTier('advanced')"
-        class="rounded-[4px] px-3 py-1 text-[13px] font-medium transition-all text-white/80 hover:text-white hover:bg-white/10">Advanced</button>
+        class="rounded-[3px] px-3 py-1 text-[13px] font-medium transition-all text-white/80 hover:text-white hover:bg-white/10">Advanced</button>
       <button type="button" role="radio" id="tier-premium" onclick="setTier('premium')"
-        class="rounded-[4px] px-3 py-1 text-[13px] font-medium transition-all text-white/80 hover:text-white hover:bg-white/10">Premium</button>
+        class="rounded-[3px] px-3 py-1 text-[13px] font-medium transition-all text-white/80 hover:text-white hover:bg-white/10">Premium</button>
     </div>
     <div class="h-5 w-px bg-white/30"></div>
     <button class="rounded p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70" aria-label="Notifications">
@@ -63,43 +63,43 @@
 </header>
 
 <!-- ═══ PRODUCT SWITCHER ═══ -->
-<aside class="fixed bottom-0 left-0 top-12 z-20 hidden w-14 border-r border-slate-200 bg-[#eef3f8] pt-2 md:block" aria-label="Product switcher">
+<aside class="fixed bottom-0 left-0 top-14 z-20 hidden w-14 border-r border-[#1E2D3D] bg-[#1E2D3D] pt-2 md:block" aria-label="Product switcher">
   <nav><div class="space-y-1">
 
-    <button class="relative flex h-10 w-full items-center justify-center text-slate-500 hover:bg-white" aria-label="Dashboard">
+    <button class="relative flex h-10 w-full items-center justify-center text-[#517894] hover:bg-[rgba(1,116,195,0.10)] hover:text-white" aria-label="Dashboard">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M3 12h18"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
     </button>
-    <button class="relative flex h-10 w-full items-center justify-center text-slate-500 hover:bg-white" aria-label="Quantum Central">
+    <button class="relative flex h-10 w-full items-center justify-center text-[#517894] hover:bg-[rgba(1,116,195,0.10)] hover:text-white" aria-label="Quantum Central">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
     </button>
-    <button class="relative flex h-10 w-full items-center justify-center text-slate-500 hover:bg-white" aria-label="CertCentral">
+    <button class="relative flex h-10 w-full items-center justify-center text-[#517894] hover:bg-[rgba(1,116,195,0.10)] hover:text-white" aria-label="CertCentral">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
     </button>
-    <button class="relative flex h-10 w-full items-center justify-center text-slate-500 hover:bg-white" aria-label="Private CA">
+    <button class="relative flex h-10 w-full items-center justify-center text-[#517894] hover:bg-[rgba(1,116,195,0.10)] hover:text-white" aria-label="Private CA">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="16" r="1"/><rect x="3" y="10" width="18" height="12" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg>
     </button>
-    <button class="relative flex h-10 w-full items-center justify-center text-slate-500 hover:bg-white" aria-label="Trust Lifecycle">
+    <button class="relative flex h-10 w-full items-center justify-center text-[#517894] hover:bg-[rgba(1,116,195,0.10)] hover:text-white" aria-label="Trust Lifecycle">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
     </button>
 
     <!-- Software Trust — ACTIVE -->
-    <button class="relative flex h-10 w-full items-center justify-center bg-sky-100 text-sky-800 before:absolute before:left-0 before:top-1 before:h-8 before:w-1 before:bg-[#0174C3]" aria-label="Software Trust" aria-current="page">
+    <button class="relative flex h-10 w-full items-center justify-center bg-[rgba(1,116,195,0.20)] text-white before:absolute before:left-0 before:top-1 before:h-8 before:w-1 before:bg-[#0174C3]" aria-label="Software Trust" aria-current="page">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
     </button>
 
-    <button class="relative flex h-10 w-full items-center justify-center text-slate-500 hover:bg-white" aria-label="DNS Trust">
+    <button class="relative flex h-10 w-full items-center justify-center text-[#517894] hover:bg-[rgba(1,116,195,0.10)] hover:text-white" aria-label="DNS Trust">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
     </button>
-    <button class="relative flex h-10 w-full items-center justify-center text-slate-500 hover:bg-white" aria-label="Content Trust">
+    <button class="relative flex h-10 w-full items-center justify-center text-[#517894] hover:bg-[rgba(1,116,195,0.10)] hover:text-white" aria-label="Content Trust">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
     </button>
-    <button class="relative flex h-10 w-full items-center justify-center text-slate-500 hover:bg-white" aria-label="Device Trust">
+    <button class="relative flex h-10 w-full items-center justify-center text-[#517894] hover:bg-[rgba(1,116,195,0.10)] hover:text-white" aria-label="Device Trust">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
     </button>
-    <button class="relative flex h-10 w-full items-center justify-center text-slate-500 hover:bg-white" aria-label="AI Agents">
+    <button class="relative flex h-10 w-full items-center justify-center text-[#517894] hover:bg-[rgba(1,116,195,0.10)] hover:text-white" aria-label="AI Agents">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg>
     </button>
-    <button class="relative flex h-10 w-full items-center justify-center text-slate-500 hover:bg-white" aria-label="Valimail">
+    <button class="relative flex h-10 w-full items-center justify-center text-[#517894] hover:bg-[rgba(1,116,195,0.10)] hover:text-white" aria-label="Valimail">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
     </button>
 
@@ -107,35 +107,35 @@
 </aside>
 
 <!-- ═══ SECONDARY NAV — Software Trust ═══ -->
-<aside class="fixed bottom-0 left-14 top-12 z-20 hidden w-[220px] border-r border-slate-300 bg-[#e6eaf0] md:block" aria-label="Software Trust navigation">
-  <div class="flex h-12 items-center border-b border-slate-300 px-4 text-sm font-medium text-[#353535]">Software Trust</div>
-  <nav class="h-[calc(100%-3rem)] overflow-y-auto py-2 text-sm">
+<aside class="fixed bottom-0 left-14 top-14 z-20 hidden w-[220px] border-r border-[#C5D0DB] bg-[#EEF2F5] md:block" aria-label="Software Trust navigation">
+  <div class="flex h-14 items-center border-b border-[#C5D0DB] px-4 text-sm font-medium text-[#1E303C]">Software Trust</div>
+  <nav class="h-[calc(100%-3.5rem)] overflow-y-auto py-2 text-sm">
 
     <!-- Overview group (expanded) -->
-    <button type="button" class="flex w-full items-center justify-between px-4 py-2.5 text-left text-sm font-semibold text-slate-800 hover:bg-white/70">
+    <button type="button" class="flex w-full items-center justify-between px-4 py-2.5 text-left text-sm font-semibold text-[#1E303C] hover:bg-[#E0EBF5] tracking-[-0.01em]">
       <span>Overview</span>
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="-rotate-180 transition-transform"><path d="m6 9 6 6 6-6"/></svg>
     </button>
-    <button id="nav-get-started" type="button" onclick="showGetStarted()" class="block w-full px-5 py-2 text-left text-sm text-slate-700 hover:bg-white/70 hover:text-[#353535]">Get started</button>
-    <button id="nav-dashboard" type="button" onclick="showDashboard()" aria-current="page" class="block w-full px-5 py-2 text-left text-sm font-medium bg-[#0174C3] text-white">Dashboard</button>
-    <button type="button" class="block w-full px-5 py-2 text-left text-sm text-slate-700 hover:bg-white/70 hover:text-[#353535]">Alerts</button>
-    <button type="button" class="block w-full px-5 py-2 text-left text-sm text-slate-700 hover:bg-white/70 hover:text-[#353535]">Audit logs</button>
-    <button type="button" class="block w-full px-5 py-2 text-left text-sm text-slate-700 hover:bg-white/70 hover:text-[#353535]">Signature logs</button>
+    <button id="nav-get-started" type="button" onclick="showGetStarted()" class="block w-full px-5 py-2 text-left text-sm text-[#3A4E5C] hover:bg-[#E0EBF5] tracking-[-0.01em]">Get started</button>
+    <button id="nav-dashboard" type="button" onclick="showDashboard()" aria-current="page" class="block w-full px-5 py-2 text-left text-sm font-medium bg-[#D2E5F4] text-[#1E303C] tracking-[-0.01em]">Dashboard</button>
+    <button type="button" class="block w-full px-5 py-2 text-left text-sm text-[#3A4E5C] hover:bg-[#E0EBF5] tracking-[-0.01em]">Alerts</button>
+    <button type="button" class="block w-full px-5 py-2 text-left text-sm text-[#3A4E5C] hover:bg-[#E0EBF5] tracking-[-0.01em]">Audit logs</button>
+    <button type="button" class="block w-full px-5 py-2 text-left text-sm text-[#3A4E5C] hover:bg-[#E0EBF5] tracking-[-0.01em]">Signature logs</button>
 
     <!-- Collapsed groups -->
-    <button type="button" class="flex w-full items-center justify-between px-4 py-2.5 text-left text-sm font-semibold text-slate-800 hover:bg-white/70 mt-1">
+    <button type="button" class="flex w-full items-center justify-between px-4 py-2.5 text-left text-sm font-semibold text-[#1E303C] hover:bg-[#E0EBF5] mt-1 tracking-[-0.01em]">
       <span>Release security</span>
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
     </button>
-    <button type="button" class="flex w-full items-center justify-between px-4 py-2.5 text-left text-sm font-semibold text-slate-800 hover:bg-white/70">
+    <button type="button" class="flex w-full items-center justify-between px-4 py-2.5 text-left text-sm font-semibold text-[#1E303C] hover:bg-[#E0EBF5] tracking-[-0.01em]">
       <span>Signing</span>
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
     </button>
-    <button type="button" class="flex w-full items-center justify-between px-4 py-2.5 text-left text-sm font-semibold text-slate-800 hover:bg-white/70">
+    <button type="button" class="flex w-full items-center justify-between px-4 py-2.5 text-left text-sm font-semibold text-[#1E303C] hover:bg-[#E0EBF5] tracking-[-0.01em]">
       <span>Configurations</span>
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
     </button>
-    <button type="button" class="flex w-full items-center justify-between px-4 py-2.5 text-left text-sm font-semibold text-slate-800 hover:bg-white/70">
+    <button type="button" class="flex w-full items-center justify-between px-4 py-2.5 text-left text-sm font-semibold text-[#1E303C] hover:bg-[#E0EBF5] tracking-[-0.01em]">
       <span>Integrations</span>
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
     </button>
@@ -144,12 +144,12 @@
 </aside>
 
 <!-- Collapse toggle -->
-<button class="fixed top-[5.15rem] z-30 hidden h-7 w-7 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 shadow-sm md:flex left-[16.4rem]" aria-label="Collapse navigation">
+<button class="fixed top-[5.65rem] z-30 hidden h-7 w-7 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 shadow-sm md:flex left-[16.4rem]" aria-label="Collapse navigation">
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="rotate-90"><path d="m6 9 6 6 6-6"/></svg>
 </button>
 
 <!-- ═══ MAIN CONTENT ═══ -->
-<main id="main-content" class="min-h-screen pt-12 md:ml-[17.25rem]">
+<main id="main-content" class="min-h-screen pt-14 md:ml-[17.25rem]">
   <div id="view-dashboard" class="w-full space-y-7 px-6 py-6 lg:px-10">
 
     <!-- PAGE HEADER -->
@@ -160,7 +160,7 @@
 
         <!-- Left: title + subtitle -->
         <div class="min-w-0 shrink-0">
-          <h1 class="text-[26px] font-medium leading-9 tracking-[-0.01em] text-[#1a2332]">Dashboard</h1>
+          <h1 class="text-[24px] font-medium leading-9 tracking-[-0.01em] text-[#1a2332]">Dashboard</h1>
           <p class="mt-0.5 text-[14px] leading-5 text-[#636a6e]">Software Trust Manager</p>
         </div>
 
@@ -170,7 +170,7 @@
           <!-- CONTRACT PERIOD — always shown; disabled for Essentials -->
           <div id="filter-contract" class="flex items-center gap-1.5">
             <label class="text-[12px] font-medium text-[#636a6e]" for="sel-contract">Contract period</label>
-            <select id="sel-contract" class="h-9 rounded-[4px] border border-[#d6dce1] bg-white px-3 text-[14px] text-[#353535]">
+            <select id="sel-contract" class="h-9 rounded-[3px] border border-[#d6dce1] bg-white px-3 text-[14px] text-[#353535]">
               <option>Jan 2024 – Dec 2024</option>
               <option>Jan 2025 – Dec 2025</option>
               <option selected>Jan 2026 – Dec 2026</option>
@@ -180,7 +180,7 @@
           <!-- CATEGORY — hidden for Essentials -->
           <div id="filter-category" class="flex items-center gap-1.5" style="display:none!important;">
             <label class="text-[12px] font-medium text-[#636a6e]" for="sel-category">Category</label>
-            <select id="sel-category" class="h-9 rounded-[4px] border border-[#d6dce1] bg-white px-3 text-[14px] text-[#353535]">
+            <select id="sel-category" class="h-9 rounded-[3px] border border-[#d6dce1] bg-white px-3 text-[14px] text-[#353535]">
               <option>Production</option>
               <option>Test</option>
             </select>
@@ -189,7 +189,7 @@
           <!-- USER — Premium only -->
           <div id="filter-user" class="flex items-center gap-1.5" style="display:none!important;">
             <label class="text-[12px] font-medium text-[#636a6e]" for="sel-user">User</label>
-            <select id="sel-user" class="h-9 rounded-[4px] border border-[#d6dce1] bg-white px-3 text-[14px] text-[#353535]">
+            <select id="sel-user" class="h-9 rounded-[3px] border border-[#d6dce1] bg-white px-3 text-[14px] text-[#353535]">
               <option>All users</option>
               <option>Alice Chen</option>
               <option>Bob Patel</option>
@@ -201,7 +201,7 @@
           <!-- TEAM — Premium only -->
           <div id="filter-team" class="flex items-center gap-1.5" style="display:none!important;">
             <label class="text-[12px] font-medium text-[#636a6e]" for="sel-team">Team</label>
-            <select id="sel-team" class="h-9 rounded-[4px] border border-[#d6dce1] bg-white px-3 text-[14px] text-[#353535]">
+            <select id="sel-team" class="h-9 rounded-[3px] border border-[#d6dce1] bg-white px-3 text-[14px] text-[#353535]">
               <option>All teams</option>
               <option>Security</option>
               <option>Platform</option>
@@ -213,17 +213,17 @@
 
           <!-- EXPORT REPORT — Premium only -->
           <button id="btn-export" type="button" style="display:none!important;"
-            class="inline-flex items-center gap-1.5 rounded-[4px] border border-[#0174C3] bg-white px-4 text-[14px] font-medium text-[#0174C3] hover:bg-[#e8f3fb] h-9">
+            class="inline-flex items-center gap-1.5 rounded-[3px] border border-[#0174C3] bg-white px-4 text-[14px] font-medium text-[#0174C3] hover:bg-[#EDF6FC] h-9">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
             Export Report
           </button>
 
           <!-- Icon buttons — always visible -->
           <div class="h-5 w-px bg-[#d6dce1]"></div>
-          <button type="button" aria-label="Manage widgets" onclick="openWidgetManager()" class="inline-flex items-center justify-center rounded-[4px] border border-[#0174C3] bg-[#0174C3] text-white hover:bg-[#0161a8] h-9 w-9">
+          <button type="button" aria-label="Manage widgets" onclick="openWidgetManager()" class="inline-flex items-center justify-center rounded-[3px] border border-[#0174C3] bg-[#0174C3] text-white hover:bg-[#015a99] h-9 w-9">
             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M3 12h18"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
           </button>
-          <button type="button" aria-label="Refresh" class="inline-flex items-center justify-center rounded-[4px] border border-[#0174C3] bg-white text-[#0174C3] hover:bg-[#e8f3fb] h-9 w-9">
+          <button type="button" aria-label="Refresh" class="inline-flex items-center justify-center rounded-[3px] border border-[#0174C3] bg-white text-[#0174C3] hover:bg-[#EDF6FC] h-9 w-9">
             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
           </button>
         </div>
@@ -244,7 +244,7 @@
     <div id="panel-overview" role="tabpanel" class="space-y-7 tab-panel active">
 
       <!-- ── Set up signing banner ── -->
-      <div class="flex items-center justify-between rounded-[4px] border border-[#d6dce1] bg-white px-5 py-4 shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+      <div class="flex items-center justify-between rounded-[3px] border border-[#d6dce1] bg-white px-5 py-4 shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
         <div class="flex items-center gap-4">
           <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-[6px] bg-[#0174C3]">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/></svg>
@@ -254,7 +254,7 @@
             <p class="text-[13px] text-[#636a6e]">Step-by-step guide to start signing</p>
           </div>
         </div>
-        <button type="button" onclick="showGetStarted()" class="ml-6 shrink-0 rounded-[4px] bg-[#0174C3] px-5 py-2 text-[14px] font-medium text-white hover:bg-[#0161a8]">Start setup</button>
+        <button type="button" onclick="showGetStarted()" class="ml-6 shrink-0 rounded-[3px] bg-[#0174C3] px-5 py-2 text-[14px] font-medium text-white hover:bg-[#015a99]">Start setup</button>
       </div>
 
       <!-- ══ 1. CERTIFICATE LIFECYCLE MANAGEMENT — all tiers; Signature control: Premium only ══ -->
@@ -265,7 +265,7 @@
         <div class="grid gap-4" style="grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));">
 
           <!-- Expiring certs in 30 days — all tiers -->
-          <div id="widget-clm-expiring" class="flex flex-col overflow-hidden rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+          <div id="widget-clm-expiring" class="flex flex-col overflow-hidden rounded-[3px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
             <div class="h-[3px] bg-[#f59e0b]"></div>
             <div class="flex flex-1 flex-col p-5">
               <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Expiring within 30 days</p>
@@ -278,7 +278,7 @@
           </div>
 
           <!-- Revoke certificates — all tiers -->
-          <div id="widget-clm-revoke" class="flex flex-col overflow-hidden rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+          <div id="widget-clm-revoke" class="flex flex-col overflow-hidden rounded-[3px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
             <div class="h-[3px] bg-[#dc2626]"></div>
             <div class="flex flex-1 flex-col p-5">
               <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Revoke certificates</p>
@@ -291,7 +291,7 @@
           </div>
 
           <!-- Certificate requiring action — all tiers -->
-          <div id="widget-clm-action" class="flex flex-col overflow-hidden rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+          <div id="widget-clm-action" class="flex flex-col overflow-hidden rounded-[3px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
             <div class="h-[3px] bg-[#f59e0b]"></div>
             <div class="flex flex-1 flex-col p-5">
               <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Requiring action</p>
@@ -304,7 +304,7 @@
           </div>
 
           <!-- Signature control (Offline release) — Premium only -->
-          <div id="card-sig-control" class="flex flex-col overflow-hidden rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]" style="display:none!important;">
+          <div id="card-sig-control" class="flex flex-col overflow-hidden rounded-[3px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]" style="display:none!important;">
             <div class="h-[3px] bg-[#0174C3]"></div>
             <div class="flex flex-1 flex-col p-5">
               <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Signature control</p>
@@ -327,7 +327,7 @@
         <div class="grid gap-4 sm:grid-cols-3">
 
           <!-- Total repositories -->
-          <div id="widget-rm-total" class="flex flex-col overflow-hidden rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+          <div id="widget-rm-total" class="flex flex-col overflow-hidden rounded-[3px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
             <div class="h-[3px] bg-[#0174C3]"></div>
             <div class="flex flex-1 flex-col p-5">
               <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Total repositories</p>
@@ -345,7 +345,7 @@
           </div>
 
           <!-- Monitored repositories -->
-          <div id="widget-rm-monitored" class="flex flex-col overflow-hidden rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+          <div id="widget-rm-monitored" class="flex flex-col overflow-hidden rounded-[3px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
             <div class="h-[3px] bg-[#0174C3]"></div>
             <div class="flex flex-1 flex-col p-5">
               <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Monitored repositories</p>
@@ -363,7 +363,7 @@
           </div>
 
           <!-- High and Critical alerts -->
-          <div id="widget-rm-alerts" class="flex flex-col overflow-hidden rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+          <div id="widget-rm-alerts" class="flex flex-col overflow-hidden rounded-[3px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
             <div class="h-[3px] bg-[#dc2626]"></div>
             <div class="flex flex-1 flex-col p-5">
               <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">High &amp; Critical alerts</p>
@@ -391,7 +391,7 @@
         <div class="grid gap-4 sm:grid-cols-3">
 
           <!-- Pending review -->
-          <div id="widget-vg-pending" class="flex flex-col overflow-hidden rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+          <div id="widget-vg-pending" class="flex flex-col overflow-hidden rounded-[3px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
             <div class="h-[3px] bg-[#f59e0b]"></div>
             <div class="flex flex-1 flex-col p-5">
               <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Pending review</p>
@@ -409,7 +409,7 @@
           </div>
 
           <!-- Decisions made -->
-          <div id="widget-vg-decisions" class="flex flex-col overflow-hidden rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+          <div id="widget-vg-decisions" class="flex flex-col overflow-hidden rounded-[3px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
             <div class="h-[3px] bg-[#22c55e]"></div>
             <div class="flex flex-1 flex-col p-5">
               <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Decisions made</p>
@@ -427,7 +427,7 @@
           </div>
 
           <!-- Suppressed findings -->
-          <div id="widget-vg-suppressed" class="flex flex-col overflow-hidden rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+          <div id="widget-vg-suppressed" class="flex flex-col overflow-hidden rounded-[3px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
             <div class="h-[3px] bg-[#94a3b8]"></div>
             <div class="flex flex-1 flex-col p-5">
               <p class="text-[12px] font-medium uppercase tracking-wide text-[#636a6e]">Suppressed findings</p>
@@ -455,7 +455,7 @@
         <div class="grid gap-6 lg:grid-cols-2">
 
           <!-- ── Left: Signing Usage ── -->
-          <div id="widget-sl-signing" class="flex flex-col rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+          <div id="widget-sl-signing" class="flex flex-col rounded-[3px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
             <div class="border-b border-[#e7ebef] px-6 pt-5 pb-4">
               <h3 class="text-[18px] font-semibold text-[#1a2332]">Signing Usage</h3>
               <p class="mt-0.5 text-[13px] text-[#636a6e]">Signature volume, failures, and trend for the selected scope.</p>
@@ -504,13 +504,13 @@
               <div>
                 <div class="mb-2.5 flex items-center justify-between">
                   <p class="text-[13px] font-semibold text-[#353535]">Signature usage history</p>
-                  <select id="sig-history-period" class="rounded-[4px] border border-[#d6dce1] bg-white px-2 py-1 text-[12px] text-[#353535]">
+                  <select id="sig-history-period" class="rounded-[3px] border border-[#d6dce1] bg-white px-2 py-1 text-[12px] text-[#353535]">
                     <option value="3">Last 3 months</option>
                     <option value="6">Last 6 months</option>
                     <option value="12">Last 12 months</option>
                   </select>
                 </div>
-                <div class="overflow-hidden rounded-[4px] border border-[#d6dce1]">
+                <div class="overflow-hidden rounded-[3px] border border-[#d6dce1]">
                   <div id="sig-history-scroll">
                     <table class="w-full text-left">
                       <thead>
@@ -558,7 +558,7 @@
           </div>
 
           <!-- ── Right: License Usage ── -->
-          <div id="widget-sl-license" class="flex flex-col rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+          <div id="widget-sl-license" class="flex flex-col rounded-[3px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
             <div class="border-b border-[#e7ebef] px-6 pt-5 pb-4">
               <h3 class="text-[18px] font-semibold text-[#1a2332]">License Usage</h3>
               <p class="mt-0.5 text-[13px] text-[#636a6e]">Consumption against contract allocation.</p>
@@ -622,12 +622,12 @@
               <div id="chart-license-usage" style="height:180px;width:100%;"></div>
 
               <!-- Warning banner -->
-              <div class="rounded-[4px] border border-[#fde68a] bg-[#fffbeb] px-4 py-3">
+              <div class="rounded-[3px] border border-[#fde68a] bg-[#fffbeb] px-4 py-3">
                 <p class="text-[13px] text-[#92400e]">At the current pace, production signatures may exceed allocation before the contract term ends.</p>
               </div>
 
               <!-- Forecasting upsell -->
-              <div id="license-overage-banner" class="flex items-start gap-3 rounded-[4px] border border-[#d6dce1] bg-[#f9fafb] px-4 py-3">
+              <div id="license-overage-banner" class="flex items-start gap-3 rounded-[3px] border border-[#d6dce1] bg-[#f9fafb] px-4 py-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0 text-[#94a3b8]"><circle cx="12" cy="16" r="1"/><rect x="3" y="10" width="18" height="12" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg>
                 <div>
                   <p class="text-[13px] font-semibold text-[#353535]">Projected overage date</p>
@@ -650,7 +650,7 @@
 
     <!-- ═══════════════════ ACTION CENTER PANEL ═══════════════════ -->
     <div id="panel-action" role="tabpanel" class="space-y-6 tab-panel">
-      <div class="flex h-64 items-center justify-center rounded-[4px] border border-dashed border-[#d6dce1] text-[14px] text-[#636a6e]">
+      <div class="flex h-64 items-center justify-center rounded-[3px] border border-dashed border-[#d6dce1] text-[14px] text-[#636a6e]">
         Action center — coming soon
       </div>
     </div>
@@ -666,12 +666,12 @@
         <div>
           <h1 class="text-[26px] font-medium leading-9 tracking-[-0.01em] text-[#1a2332]">Get started</h1>
         </div>
-        <button type="button" onclick="showDashboard()" class="mt-1 shrink-0 rounded-[4px] border border-[#0174C3] bg-white px-4 py-2 text-[14px] font-medium text-[#0174C3] hover:bg-[#e8f3fb]">Back to Dashboard</button>
+        <button type="button" onclick="showDashboard()" class="mt-1 shrink-0 rounded-[3px] border border-[#0174C3] bg-white px-4 py-2 text-[14px] font-medium text-[#0174C3] hover:bg-[#EDF6FC]">Back to Dashboard</button>
       </div>
     </div>
 
     <!-- Checklist card -->
-    <div class="rounded-[4px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+    <div class="rounded-[3px] border border-[#d6dce1] bg-white shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
 
       <!-- Card header (no collapse arrow) -->
       <div class="border-b border-[#e7ebef] px-6 py-4">
@@ -729,17 +729,17 @@
             <p class="mt-1.5 text-[13px] text-[#636a6e]">The Unified Client Manager handles your connection and credentials securely. Select your operating system to download the correct version.</p>
             <!-- OS selector -->
             <div class="mt-5 flex gap-3">
-              <button type="button" id="gs-os-windows" onclick="gsSelectOS('windows')" class="flex flex-1 items-center gap-3 rounded-[4px] border-2 border-[#0174C3] bg-[#e8f3fb] px-4 py-3">
+              <button type="button" id="gs-os-windows" onclick="gsSelectOS('windows')" class="flex flex-1 items-center gap-3 rounded-[3px] border-2 border-[#0174C3] bg-[#e8f3fb] px-4 py-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#0174C3"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
                 <span class="text-[14px] font-semibold text-[#0174C3]">Windows</span>
                 <div class="ml-auto h-4 w-4 rounded-full border-2 border-[#0174C3] flex items-center justify-center"><div class="h-2 w-2 rounded-full bg-[#0174C3]"></div></div>
               </button>
-              <button type="button" id="gs-os-macos" onclick="gsSelectOS('macos')" class="flex flex-1 items-center gap-3 rounded-[4px] border-2 border-[#d6dce1] bg-white px-4 py-3 hover:border-[#0174C3]">
+              <button type="button" id="gs-os-macos" onclick="gsSelectOS('macos')" class="flex flex-1 items-center gap-3 rounded-[3px] border-2 border-[#d6dce1] bg-white px-4 py-3 hover:border-[#0174C3]">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
                 <span class="text-[14px] font-medium text-[#353535]">MacOS</span>
                 <div class="ml-auto h-4 w-4 rounded-full border-2 border-[#d6dce1]"></div>
               </button>
-              <button type="button" id="gs-os-linux" onclick="gsSelectOS('linux')" class="flex flex-1 items-center gap-3 rounded-[4px] border-2 border-[#d6dce1] bg-white px-4 py-3 hover:border-[#0174C3]">
+              <button type="button" id="gs-os-linux" onclick="gsSelectOS('linux')" class="flex flex-1 items-center gap-3 rounded-[3px] border-2 border-[#d6dce1] bg-white px-4 py-3 hover:border-[#0174C3]">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
                 <span class="text-[14px] font-medium text-[#353535]">Linux</span>
                 <div class="ml-auto h-4 w-4 rounded-full border-2 border-[#d6dce1]"></div>
@@ -760,7 +760,7 @@
                 <span><strong>Sync your user profile:</strong> Open <strong>DigiCert ONE Clients</strong>, and then sign in with your credentials.</span>
               </li>
             </ol>
-            <button type="button" onclick="gsCompleteStep(1)" class="mt-6 flex w-full items-center justify-center gap-2 rounded-[4px] bg-[#0174C3] px-6 py-3 text-[14px] font-medium text-white hover:bg-[#0161a8]">
+            <button type="button" onclick="gsCompleteStep(1)" class="mt-6 flex w-full items-center justify-center gap-2 rounded-[3px] bg-[#0174C3] px-6 py-3 text-[14px] font-medium text-white hover:bg-[#015a99]">
               Download DigiCert ONE Clients
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
             </button>
@@ -784,7 +784,7 @@
                 <span><strong>Verify installation</strong> by running <code class="rounded bg-[#f0f3f5] px-1.5 py-0.5 font-mono text-[12px]">smctl version</code> in your terminal.</span>
               </li>
             </ol>
-            <button type="button" onclick="gsCompleteStep(2)" class="mt-6 flex w-full items-center justify-center gap-2 rounded-[4px] bg-[#0174C3] px-6 py-3 text-[14px] font-medium text-white hover:bg-[#0161a8]">
+            <button type="button" onclick="gsCompleteStep(2)" class="mt-6 flex w-full items-center justify-center gap-2 rounded-[3px] bg-[#0174C3] px-6 py-3 text-[14px] font-medium text-white hover:bg-[#015a99]">
               Download CLI Tool
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
             </button>
@@ -808,7 +808,7 @@
                 <span><strong>Test connectivity</strong> by running <code class="rounded bg-[#f0f3f5] px-1.5 py-0.5 font-mono text-[12px]">smctl healthcheck</code> to ensure your environment is reachable.</span>
               </li>
             </ol>
-            <button type="button" onclick="gsCompleteStep(3)" class="mt-6 flex w-full items-center justify-center gap-2 rounded-[4px] bg-[#0174C3] px-6 py-3 text-[14px] font-medium text-white hover:bg-[#0161a8]">
+            <button type="button" onclick="gsCompleteStep(3)" class="mt-6 flex w-full items-center justify-center gap-2 rounded-[3px] bg-[#0174C3] px-6 py-3 text-[14px] font-medium text-white hover:bg-[#015a99]">
               Run Health Check
             </button>
           </div>
@@ -831,7 +831,7 @@
                 <span><strong>Verify the signature</strong> and check that it appears in your Signature logs in STM.</span>
               </li>
             </ol>
-            <button type="button" onclick="gsCompleteStep(4)" class="mt-6 flex w-full items-center justify-center gap-2 rounded-[4px] bg-[#16a34a] px-6 py-3 text-[14px] font-medium text-white hover:bg-[#15803d]">
+            <button type="button" onclick="gsCompleteStep(4)" class="mt-6 flex w-full items-center justify-center gap-2 rounded-[3px] bg-[#16a34a] px-6 py-3 text-[14px] font-medium text-white hover:bg-[#15803d]">
               Mark as Complete ✓
             </button>
           </div>
@@ -845,8 +845,8 @@
 
 <script>
   // ── Tier switching ──────────────────────────────────────────────
-  var TIER_ACTIVE   = 'rounded-[4px] px-3 py-1 text-[13px] font-medium transition-all bg-white text-[#0174C3] shadow-[0_1px_3px_rgba(0,0,0,0.12)]';
-  var TIER_INACTIVE = 'rounded-[4px] px-3 py-1 text-[13px] font-medium transition-all text-white/80 hover:text-white hover:bg-white/10';
+  var TIER_ACTIVE   = 'rounded-[3px] px-3 py-1 text-[13px] font-medium transition-all bg-white text-[#0174C3] shadow-[0_1px_3px_rgba(0,0,0,0.12)]';
+  var TIER_INACTIVE = 'rounded-[3px] px-3 py-1 text-[13px] font-medium transition-all text-white/80 hover:text-white hover:bg-white/10';
 
   function show(id) { var el = document.getElementById(id); if (el) el.style.removeProperty('display'); }
   function hide(id) { var el = document.getElementById(id); if (el) el.style.setProperty('display', 'none', 'important'); }
@@ -1090,8 +1090,8 @@
   }
 
   // ── Get Started view ───────────────────────────────────────────
-  var NAV_ACTIVE   = 'block w-full px-5 py-2 text-left text-sm font-medium bg-[#0174C3] text-white';
-  var NAV_INACTIVE = 'block w-full px-5 py-2 text-left text-sm text-slate-700 hover:bg-white/70 hover:text-[#353535]';
+  var NAV_ACTIVE   = 'block w-full px-5 py-2 text-left text-sm font-medium bg-[#D2E5F4] text-[#1E303C] tracking-[-0.01em]';
+  var NAV_INACTIVE = 'block w-full px-5 py-2 text-left text-sm text-[#3A4E5C] hover:bg-[#E0EBF5] tracking-[-0.01em]';
 
   function showGetStarted() {
     document.getElementById('view-dashboard').style.setProperty('display', 'none', 'important');
@@ -1156,7 +1156,7 @@
       var btn = document.getElementById('gs-os-' + o);
       if (!btn) return;
       var active = o === os;
-      btn.className = 'flex flex-1 items-center gap-3 rounded-[4px] border-2 px-4 py-3 ' +
+      btn.className = 'flex flex-1 items-center gap-3 rounded-[3px] border-2 px-4 py-3 ' +
         (active ? 'border-[#0174C3] bg-[#e8f3fb]' : 'border-[#d6dce1] bg-white hover:border-[#0174C3]');
       var label = btn.querySelector('span');
       if (label) label.className = 'text-[14px] ' + (active ? 'font-semibold text-[#0174C3]' : 'font-medium text-[#353535]');
@@ -1402,9 +1402,9 @@
     <p id="wm-count" class="text-[13px] text-[#636a6e]">12 of 12 visible</p>
     <div class="flex gap-2">
       <button type="button" onclick="wmFocusView()"
-        class="rounded-[4px] border border-[#d6dce1] px-3 py-1.5 text-[13px] font-medium text-[#353535] hover:bg-[#f0f3f5]">Focus View</button>
+        class="rounded-[3px] border border-[#d6dce1] px-3 py-1.5 text-[13px] font-medium text-[#353535] hover:bg-[#f0f3f5]">Focus View</button>
       <button type="button" onclick="wmShowAll()"
-        class="rounded-[4px] border border-[#d6dce1] px-3 py-1.5 text-[13px] font-medium text-[#353535] hover:bg-[#f0f3f5]">Show All</button>
+        class="rounded-[3px] border border-[#d6dce1] px-3 py-1.5 text-[13px] font-medium text-[#353535] hover:bg-[#f0f3f5]">Show All</button>
     </div>
   </div>
 
@@ -1414,9 +1414,9 @@
   <!-- Footer -->
   <div class="flex items-center justify-end gap-3 border-t border-[#e7ebef] px-6 py-4">
     <button type="button" onclick="closeWidgetManager()"
-      class="rounded-[4px] border border-[#d6dce1] px-4 py-2 text-[14px] font-medium text-[#353535] hover:bg-[#f0f3f5]">Cancel</button>
+      class="rounded-[3px] border border-[#d6dce1] px-4 py-2 text-[14px] font-medium text-[#353535] hover:bg-[#f0f3f5]">Cancel</button>
     <button type="button" onclick="applyWidgetChanges()"
-      class="rounded-[4px] bg-[#0174C3] px-4 py-2 text-[14px] font-medium text-white hover:bg-[#0161a8]">Apply Changes</button>
+      class="rounded-[3px] bg-[#0174C3] px-4 py-2 text-[14px] font-medium text-white hover:bg-[#015a99]">Apply Changes</button>
   </div>
 </div>
 
